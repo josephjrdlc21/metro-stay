@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "jsx": "react-jsx",
+    "strict": true,
+    "allowJs": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "noEmit": true,
+    "types": ["vite/client"],
+  },
+  "include": ["app/Laravel/Resources/js/**/*.ts", "app/Laravel/Resources/js/**/*.tsx"],
+  "exclude": ["app/Laravel/Resources/js/bootstrap.js", "node_modules", "vendor"]
+}
