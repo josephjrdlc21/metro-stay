@@ -5,6 +5,6 @@ $namespace = "App\Laravel\Controllers\Web";
 
 Route::group(['as' => "web.", 'namespace' => $namespace, 'middleware' => ["web"]], function() {
     Route::get('/', function () {
-        return inertia('test/home');
+        return inertia('modules/index');
     });
 });

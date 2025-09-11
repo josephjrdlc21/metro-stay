@@ -15,6 +15,13 @@
     "noEmit": true,
     "types": ["vite/client"],
   },
-  "include": ["app/Laravel/Resources/js/**/*.ts", "app/Laravel/Resources/js/**/*.tsx"],
-  "exclude": ["app/Laravel/Resources/js/bootstrap.js", "node_modules", "vendor"]
+  "include": [
+    "app/Laravel/Resources/js/web/**/*.ts", 
+    "app/Laravel/Resources/js/web/**/*.tsx"
+  ],
+  "exclude": [
+    "app/Laravel/Resources/js/bootstrap.js", 
+    "node_modules", 
+    "vendor"
+  ]
 }

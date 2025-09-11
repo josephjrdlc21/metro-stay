@@ -7,7 +7,7 @@
         <title>Laravel</title>
         @viteReactRefresh
         @routes
-        @vite('app/Laravel/Resources/js/app.jsx')
+        @vite('app/Laravel/Resources/js/web/app.jsx')
         @inertiaHead
     </head>
     <body>
