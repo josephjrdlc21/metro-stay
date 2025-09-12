@@ -1,4 +1,5 @@
 import '../bootstrap.js';
+import { Provider } from "@/components/ui/provider"
 import { createInertiaApp } from '@inertiajs/react'
 import { createRoot } from 'react-dom/client'
 
@@ -8,6 +9,10 @@ createInertiaApp({
         return pages[`/app/Laravel/Resources/js/web/${name}.tsx`]
     },
     setup({ el, App, props }) {
-        createRoot(el).render(<App {...props} />)
+        createRoot(el).render(
+            <Provider>
+                <App {...props} />
+            </Provider>
+        )
     },
 })
