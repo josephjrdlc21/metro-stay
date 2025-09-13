@@ -19,12 +19,15 @@
         "paths": {
             "@/*": ["src/*"],
             "@web/*": ["app/Laravel/Resources/js/web/*"],
+            "@portal/*": ["app/Laravel/Resources/js/portal/*"],
             "@ziggy/*": ["vendor/tightenco/ziggy/src/js/*"] 
         }
     },
     "include": [
         "app/Laravel/Resources/js/web/**/*.ts", 
         "app/Laravel/Resources/js/web/**/*.tsx",
+        "app/Laravel/Resources/js/portal/**/*.ts", 
+        "app/Laravel/Resources/js/portal/**/*.tsx",
         "src/**/*.ts",
         "src/**/*.tsx",
     ],

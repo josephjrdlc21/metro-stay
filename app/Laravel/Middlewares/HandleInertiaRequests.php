@@ -18,6 +18,10 @@ class HandleInertiaRequests extends Middleware
 
     public function rootView(Request $request)
     {
+        if ($request->is('admin*')) {
+            return 'portal';
+        }
+        
         return 'app';
     }
 
