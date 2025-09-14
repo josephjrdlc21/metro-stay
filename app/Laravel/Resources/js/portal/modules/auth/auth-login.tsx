@@ -1,5 +1,5 @@
 import AuthLayout from "@portal/layouts/auth-layout"
-import Notification from "@portal/components/notification"
+import AppNotification from "@portal/components/app-notification"
 import { Button } from "@chakra-ui/react"
 import { Card } from "@chakra-ui/react"
 import { Text } from "@chakra-ui/react"
@@ -46,7 +46,7 @@ export default function AuthLogin({ values }: { values: any }){
             <Card.Root w="100%" maxW={{ base: "100%", md: "350px", lg: "480px" }} shadow="md">
                 <>
                     <Card.Body gap="2">
-                        {flash.message && <Notification status={flash.status} title={flash.message}/>}
+                        {flash.message && <AppNotification status={flash.status} title={flash.message}/>}
                         <Box display="flex" alignItems="center" justifyContent="center" gap={2}>
                             <Icon as={FaEnvelopeOpen} boxSize={7} color="cyan.600" />
                             <Heading size="3xl" color="gray.700">MetroStay</Heading>

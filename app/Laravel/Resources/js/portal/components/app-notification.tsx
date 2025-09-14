@@ -5,7 +5,7 @@ interface NotificationProps {
   title: string
 }
 
-export default function Notification({ status = "error", title }: NotificationProps){
+export default function AppNotification({ status = "error", title }: NotificationProps){
     return(
         <Alert.Root status={status === "failed" ? "error" : status}>
             <Alert.Indicator />

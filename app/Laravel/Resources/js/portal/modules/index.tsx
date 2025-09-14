@@ -1,12 +1,9 @@
-import { Button, HStack } from "@chakra-ui/react"
+import MainLayout from "@portal/layouts/main-layout";
 
-export default function Index({ data }: { data: any }){
-    let word: string = "Hello Worlds";
-
+export default function Index({ values }: { values: any }){
     return (
-        <HStack>
-            <Button>{word}</Button>
-            <Button>{data.page_title}</Button>
-        </HStack> 
+        <MainLayout>
+            
+        </MainLayout>
     )
 }
