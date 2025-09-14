@@ -9,6 +9,7 @@ import { Icon } from "@chakra-ui/react"
 import { Center } from "@chakra-ui/react"
 import { Field, Input } from "@chakra-ui/react"
 import { Stack } from "@chakra-ui/react"
+import { Spinner } from "@chakra-ui/react"
 import { PasswordInput } from "@/components/ui/password-input"
 import { FaEnvelopeOpen } from "react-icons/fa"
 import { FcGoogle } from "react-icons/fc"
@@ -74,7 +75,9 @@ export default function AuthLogin({ values }: { values: any }){
                                         </Field.Label>
                                         <PasswordInput placeholder="*********" value={data.password}  onChange={e => setData('password', e.target.value)}/>
                                     </Field.Root>
-                                    <Button type="submit" bg="cyan.600" disabled={processing}>{processing ? "Loading..."  : "Login"}</Button>
+                                    <Button type="submit" bg="cyan.600" disabled={processing}>
+                                        {processing ?  <Spinner />  : "Login"}
+                                    </Button>
                                 </Stack>
                             </form>
                         </Center>
