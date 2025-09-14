@@ -51,7 +51,7 @@ export default function AuthLogin({ values }: { values: any }){
                             <Icon as={FaEnvelopeOpen} boxSize={7} color="cyan.600" />
                             <Heading size="3xl" color="gray.700">MetroStay</Heading>
                         </Box>
-                        <Text textStyle="sm" textAlign="center" my={4} color="gray.500">Glad to see you again <br/> Login to you account below</Text>
+                        <Text textStyle="sm" textAlign="center" my={4} color="gray.500">Glad to see you again <br/> Login to your account below</Text>
                         <Center>
                             <Button w={'full'} variant={'outline'}>
                                 <Center gap={2}>
