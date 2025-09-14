@@ -7,7 +7,7 @@ use App\Laravel\Requests\PageRequest;
 use Inertia\Response;
 
 class MainController extends Controller{
-    protected $data;
+    protected array $data = [];
 
     public function __construct(){
         parent::__construct();

@@ -20,7 +20,7 @@
             "@/*": ["src/*"],
             "@web/*": ["app/Laravel/Resources/js/web/*"],
             "@portal/*": ["app/Laravel/Resources/js/portal/*"],
-            "@ziggy/*": ["vendor/tightenco/ziggy/src/js/*"] 
+            "@ziggy": ["vendor/tightenco/ziggy/src/js"], 
         }
     },
     "include": [

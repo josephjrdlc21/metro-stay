@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Laravel\Middlewares\Web;
+namespace App\Laravel\Middlewares\Portal;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
