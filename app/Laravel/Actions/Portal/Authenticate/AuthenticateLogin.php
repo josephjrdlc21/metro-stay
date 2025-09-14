@@ -5,14 +5,14 @@ namespace App\Laravel\Actions\Portal\Authenticate;
 use Illuminate\Support\Str;
 
 class AuthenticateLogin{
-    private string $email;
-    private string $password;
-    private string $guard;
+    private ?string $email;
+    private ?string $password;
+    private ?string $guard;
 
     public function __construct(
-        string $email,
-        string $password,
-        string $guard
+        string $email = null,
+        string $password = null,
+        string $guard = null,
     ) {
         $this->email = $email;
         $this->password = $password;
