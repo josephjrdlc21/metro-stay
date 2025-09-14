@@ -16,25 +16,25 @@ export default function AppSidebar(){
             bg="white"
         >
             {/* Logo */}
-            <Box display="flex" alignItems="center" gap={2} p="5">
+            <Box display="flex" alignItems="center" gap={2} p={5}>
                 <Icon as={FaEnvelopeOpen} boxSize={6} color="cyan.600" />
-                <Text fontSize="2xl" color="gray.700">MetroStay</Text >
+                <Text fontSize="2xl" fontWeight="semibold" color="gray.700">MetroStay</Text >
             </Box>
 
             {/* Sidebar Sections */}
-            <VStack align="start" px="4">
+            <VStack align="start" p={4}>
                 {/* Quick Access */}
-                <Text fontSize="md" fontWeight="medium" color="gray.500">
+                <Text fontSize="md" fontWeight="medium" color="gray.800">
                     Quick Access
                 </Text>
                 <VStack align="start" w="full">
                     <Box display="flex" alignItems="center" gap={3} px={3} py={2}>
                         <Icon boxSize={4} as={FaHome} color="gray.400"/>
-                        <Text fontSize="sm" color="gray.600">Dashboard</Text>
+                        <Text fontSize="sm" fontWeight="normal" color="gray.600">Dashboard</Text>
                     </Box>
                     <Box display="flex" alignItems="center" gap={3} px={3} py={2}>
                         <Icon boxSize={4} as={FaUser} color="gray.400"/>
-                        <Text fontSize="sm" color="gray.600">Users</Text>
+                        <Text fontSize="sm" fontWeight="normal" color="gray.600">Users</Text>
                     </Box>
                 </VStack>
                 <Separator variant="solid" />
