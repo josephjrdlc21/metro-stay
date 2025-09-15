@@ -2,7 +2,7 @@
 
 namespace App\Laravel\Controllers\Portal;
 
-use App\Laravel\Actions\Portal\Authenticate\AuthenticateLogin;
+use App\Laravel\Actions\Portal\Authenticate\{AuthenticateLogin, AuthenticateLogout};
 
 use App\Laravel\Requests\PageRequest;
 
@@ -39,5 +39,18 @@ class AuthenticateController extends Controller{
         session()->flash('notification-msg', $result['message']);
 
         return $result['success'] ? redirect()->route('portal.index') : redirect()->route('portal.auth.login');
+    }
+
+    public function logout(PageRequest $request): RedirectResponse {
+        $action = new AuthenticateLogout(
+            $this->guard
+        );
+
+        $result = $action->execute();
+
+        session()->flash('notification-status', $result['status']);
+        session()->flash('notification-msg', $result['message']);
+
+        return $result['success'] ? redirect()->route('portal.auth.login') : redirect()->route('portal.index');
     }
 }

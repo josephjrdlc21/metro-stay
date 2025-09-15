@@ -10,8 +10,12 @@ import { Menu } from "@chakra-ui/react"
 import { Portal } from "@chakra-ui/react"
 import { TfiLayoutListPost } from "react-icons/tfi"
 import { TfiMenu } from "react-icons/tfi"
+import { Link } from "@chakra-ui/react"
+import { useRoute } from "@ziggy"
 
 export default function AppTopbar(){
+    const route = useRoute();
+
     const { toggleSidebar } = useSidebar();
 
     return(
@@ -49,7 +53,11 @@ export default function AppTopbar(){
                             <Menu.Content>
                                 <Menu.Item cursor="pointer" value="account">Account</Menu.Item>
                                 <Menu.Item cursor="pointer" value="settings">Settings</Menu.Item>
-                                <Menu.Item cursor="pointer" value="logout">Logout</Menu.Item>
+                                <Menu.Item cursor="pointer" value="logout">
+                                    <Link href={route('portal.auth.logout')}>
+                                        Logout
+                                    </Link>
+                                </Menu.Item>
                             </Menu.Content>
                             </Menu.Positioner>
                         </Portal>

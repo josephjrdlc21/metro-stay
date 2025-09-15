@@ -10,7 +10,7 @@ Route::group(['prefix' => "admin", 'as' => "portal.", 'namespace' => $namespace,
             Route::post('/login',  ['uses' => "AuthenticateController@authenticate"]);
         });
 
-        //Route::get('/logout', ['as' => "logout", 'uses' => "AuthenticateController@logout"]);
+        Route::get('/logout', ['as' => "logout", 'uses' => "AuthenticateController@logout"]);
     });
 
     Route::group(['middleware' => "portal.auth"], function(){
