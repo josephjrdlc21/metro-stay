@@ -43,7 +43,7 @@ export default function AuthLogin({ values }: { values: any }){
     return (
         <AuthLayout>
             <Head title={values.page_title}/>
-            <Card.Root w="100%" maxW={{ base: "100%", md: "350px", lg: "480px" }} shadow="md">
+            <Card.Root w="100%" maxW={{ base: "100%", md: "550px", lg: "480px" }} shadow="md">
                 <>
                     <Card.Body gap="2">
                         {flash.message && <AppNotification status={flash.status} title={flash.message}/>}

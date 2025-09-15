@@ -19,7 +19,7 @@ class AdminAccountSeeder extends Seeder
         if(!$user){
             $account = new User;
             $account->name = "MASTER ADMIN";
-            //$account->status = "active";
+            $account->status = "active";
             $account->email = "admin@gmail.com";
             $account->password = bcrypt("admin");
             $account->save();
