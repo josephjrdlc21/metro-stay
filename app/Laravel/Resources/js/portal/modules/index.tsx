@@ -3,8 +3,7 @@ import { Card } from "@chakra-ui/react"
 import { Heading } from "@chakra-ui/react"
 import { Breadcrumb } from "@chakra-ui/react"
 import { Flex } from "@chakra-ui/react"
-import { Icon } from "@chakra-ui/react"
-import { AiOutlineBank } from "react-icons/ai"
+import { LuHouse } from "react-icons/lu"
 import { Head } from "@inertiajs/react"
 
 export default function Index({ values }: { values: any }){
@@ -19,7 +18,7 @@ export default function Index({ values }: { values: any }){
                             <Breadcrumb.List>
                                 <Breadcrumb.Item>
                                     <Breadcrumb.Link href="#">
-                                        <Icon boxSize={4} as={AiOutlineBank} color="cyan.700" />
+                                        <LuHouse />
                                     </Breadcrumb.Link>
                                 </Breadcrumb.Item>
                                 <Breadcrumb.Separator />

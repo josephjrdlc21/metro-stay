@@ -18,9 +18,12 @@ import { AiOutlineFileDone } from "react-icons/ai"
 import { AiOutlineUserSwitch } from "react-icons/ai"
 import { AiOutlineFieldTime } from "react-icons/ai"
 import { Link } from "@inertiajs/react"
+import { useRoute } from "@ziggy"
 import { useSidebar } from "@portal/context/sidebar-context"
 
 export default function AppSidebar(){
+    const route = useRoute();
+
     const { isOpen, sidebarRef } = useSidebar();
 
     return(
@@ -33,12 +36,13 @@ export default function AppSidebar(){
             }}
             h="full"
             borderRight="1px"
-            bg="bg.surface"
+            bg="white"
             transition="all 0.3s ease-in-out"
             zIndex={{ base: "overlay", md: "auto" }}
             pos={{ base: "fixed", md: "relative" }}
             top="0"
             left="0"
+            _dark={{ bg:"gray.900" }}
         >
             {/* Logo */}
             <Box display={{ base: isOpen ? "flex" : "none", md: "flex", lg: "flex"}} justifyContent={{ base: isOpen ? "flex-start" : "none", md: isOpen ? "flex-start" : "center", lg: isOpen ? "center" : "flex-start"}} alignItems="center" gap={2} p={5}>
@@ -73,7 +77,7 @@ export default function AppSidebar(){
                         cursor: "pointer",
                         color: "white",
                     }}>
-                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px"}}>
+                        <Link href={route('portal.index')} style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
                             <Icon boxSize={4} as={AiOutlineDesktop} />
                             <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
                                 Dashboard
@@ -95,20 +99,20 @@ export default function AppSidebar(){
                         cursor: "pointer",
                         color: "white",
                     }}>
-                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px"}}>
+                        <Link href={route('portal.users.index')} style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
                             <Icon boxSize={4} as={AiOutlineUser} />
                             <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
                                 Users
                             </Text>
                         </Link>
                     </Box>
-                    <Box gap={3} px={3} py={3} w="full" rounded="md" _dark={{ color: "gray.300" }} color="gray.600"
+                    <Box display="flex" alignItems="center" gap={3} px={3} py={3} w="full" rounded="md" _dark={{ color: "gray.300" }} color="gray.600"
                         transition="all 0.2s ease-in-out" role="group" _hover={{
                         bg: "cyan.600",
                         cursor: "pointer",
                         color: "white",
                     }}>
-                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px"}}>
+                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
                             <Icon boxSize={4} as={AiOutlineCalendar} />
                             <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
                                 Bookings
@@ -121,7 +125,7 @@ export default function AppSidebar(){
                         cursor: "pointer",
                         color: "white",
                     }}>
-                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px"}}>
+                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
                             <Icon boxSize={4} as={AiOutlineTeam} />
                             <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
                                 Customers
@@ -134,7 +138,7 @@ export default function AppSidebar(){
                         cursor: "pointer",
                         color: "white",
                     }}>
-                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px"}}>
+                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
                             <Icon boxSize={4} as={AiOutlineWallet} />
                             <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
                                 Rooms
@@ -147,7 +151,7 @@ export default function AppSidebar(){
                         cursor: "pointer",
                         color: "white",
                     }}>
-                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px"}}>
+                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
                             <Icon boxSize={4} as={AiOutlinePicCenter} />
                             <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
                                 Room Types
@@ -160,7 +164,7 @@ export default function AppSidebar(){
                         cursor: "pointer",
                         color: "white",
                     }}>
-                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px"}}>
+                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
                             <Icon boxSize={4} as={AiOutlineBlock} />
                             <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
                                 House Keeping
@@ -173,7 +177,7 @@ export default function AppSidebar(){
                         cursor: "pointer",
                         color: "white",
                     }}>
-                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px"}}>
+                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
                             <Icon boxSize={4} as={AiOutlineCreditCard} />
                             <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
                                 Payments
@@ -186,7 +190,7 @@ export default function AppSidebar(){
                         cursor: "pointer",
                         color: "white",
                     }}>
-                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px"}}>
+                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
                             <Icon boxSize={4} as={AiOutlineBarChart} />
                             <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
                                 Sales Reports
@@ -208,7 +212,7 @@ export default function AppSidebar(){
                         cursor: "pointer",
                         color: "white",
                     }}>
-                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px"}}>
+                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
                             <Icon boxSize={4} as={AiOutlineUserSwitch} />
                             <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
                                 Roles
@@ -221,7 +225,7 @@ export default function AppSidebar(){
                         cursor: "pointer",
                         color: "white",
                     }}>
-                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px"}}>
+                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
                             <Icon boxSize={4} as={AiOutlineFileDone} />
                             <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
                                 Permissions
@@ -243,7 +247,7 @@ export default function AppSidebar(){
                         cursor: "pointer",
                         color: "white",
                     }}>
-                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px"}}>
+                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
                             <Icon boxSize={4} as={AiOutlineFieldTime} />
                             <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
                                 Activity Logs

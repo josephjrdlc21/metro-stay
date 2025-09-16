@@ -9,15 +9,28 @@ import { PropsWithChildren } from "react"
 export default function MainLayout({ children }: PropsWithChildren){
     return(
         <SidebarProvider>
-            <Flex minH="100vh" fontFamily="'Roboto', sans-serif">
+            <Flex 
+                minH="100vh" 
+                fontFamily="'Roboto', sans-serif"
+                w="100vw"
+                overflowX="hidden"
+            >
                 {/* Sidebar */}
                 <AppSidebar />
                 {/* Main content area */}
-                <Flex direction="column" flex="1">
+                <Flex 
+                    direction="column" 
+                    flex="1" minW={0}
+                >
                     {/* Topbar */}
                     <AppTopbar />
                     {/* Page content */}
-                    <Box flex="1" p={4} _dark={{ bg: "black" }} bg="gray.100" rounded="xl">
+                    <Box 
+                        flex="1" p={4}
+                        _dark={{ bg: "black" }} 
+                        bg="gray.100" rounded="xl" 
+                        minW={0}
+                    >
                         {children}
                     </Box>
                     {/* Footer */}

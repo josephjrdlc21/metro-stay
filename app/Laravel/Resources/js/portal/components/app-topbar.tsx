@@ -41,7 +41,7 @@ export default function AppTopbar(){
                     >
                         <Icon as={AiOutlineMenu} />
                     </IconButton>
-                    <InputGroup flex="1" startElement={<LuSearch />} mx="3" endElement={<Icon as={TfiLayoutListPost} color="cyan.700" />} w={{ base: "180px", md: "300px" }}>
+                    <InputGroup flex="1" startElement={<LuSearch />} mx="3" endElement={<Icon as={TfiLayoutListPost} color="cyan.700" />} w={{ base: "130px", md: "300px" }}>
                         <Input placeholder="Search" rounded="lg"/>
                     </InputGroup>
                 </Flex>
@@ -56,32 +56,32 @@ export default function AppTopbar(){
                         </Menu.Trigger>
                         <Portal>
                             <Menu.Positioner>
-                            <Menu.Content>
-                                <Menu.ItemGroup>
-                                    <Menu.ItemGroupLabel>Segun Adebayo</Menu.ItemGroupLabel>
-                                    <Menu.Item display="flex" alignItems="center" cursor="pointer" value="bold">
-                                        <Icon boxSize={4} as={AiOutlineUserSwitch} />
-                                        <Link href="#"  style={{ border: "0px", outline: "none", boxShadow: "none", textDecoration: "none", color: "inherit"}}>
-                                            Profile
-                                        </Link>
-                                    </Menu.Item>
-                                </Menu.ItemGroup>
-                                <Menu.Separator />
-                                <Menu.ItemGroup>
-                                    <Menu.Item display="flex" alignItems="center" cursor="pointer" value="settings">
-                                        <Icon boxSize={4} as={AiOutlineLock} />
-                                        <Link href="#"  style={{ border: "0px", outline: "none", boxShadow: "none", textDecoration: "none", color: "inherit"}}>
-                                            Change Password
-                                        </Link>  
-                                    </Menu.Item>
-                                    <Menu.Item display="flex" alignItems="center" cursor="pointer" value="logout">
-                                        <Icon boxSize={4} as={AiOutlineLogout} />
-                                        <Link href={route('portal.auth.logout')}  style={{ border: "0px", outline: "none", boxShadow: "none", textDecoration: "none", color: "inherit"}}>
-                                            Logout
-                                        </Link>
-                                    </Menu.Item>
-                                </Menu.ItemGroup>
-                            </Menu.Content>
+                                <Menu.Content>
+                                    <Menu.ItemGroup>
+                                        <Menu.ItemGroupLabel>Segun Adebayo</Menu.ItemGroupLabel>
+                                        <Menu.Item display="flex" alignItems="center" cursor="pointer" value="bold">
+                                            <Icon boxSize={4} as={AiOutlineUserSwitch} />
+                                            <Link href="#"  style={{ border: "0px", outline: "none", boxShadow: "none", textDecoration: "none", color: "inherit"}}>
+                                                Profile
+                                            </Link>
+                                        </Menu.Item>
+                                    </Menu.ItemGroup>
+                                    <Menu.Separator />
+                                    <Menu.ItemGroup>
+                                        <Menu.Item display="flex" alignItems="center" cursor="pointer" value="settings">
+                                            <Icon boxSize={4} as={AiOutlineLock} />
+                                            <Link href="#"  style={{ border: "0px", outline: "none", boxShadow: "none", textDecoration: "none", color: "inherit"}}>
+                                                Change Password
+                                            </Link>  
+                                        </Menu.Item>
+                                        <Menu.Item display="flex" alignItems="center" cursor="pointer" value="logout">
+                                            <Icon boxSize={4} as={AiOutlineLogout} />
+                                            <Link href={route('portal.auth.logout')}  style={{ border: "0px", outline: "none", boxShadow: "none", textDecoration: "none", color: "inherit"}}>
+                                                Logout
+                                            </Link>
+                                        </Menu.Item>
+                                    </Menu.ItemGroup>
+                                </Menu.Content>
                             </Menu.Positioner>
                         </Portal>
                     </Menu.Root>

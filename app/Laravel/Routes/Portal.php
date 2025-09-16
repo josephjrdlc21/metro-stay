@@ -15,5 +15,9 @@ Route::group(['prefix' => "admin", 'as' => "portal.", 'namespace' => $namespace,
 
     Route::group(['middleware' => "portal.auth"], function(){
         Route::get('/',  ['as' => "index", 'uses' => "MainController@index"]);
+
+        Route::group(['prefix' => "users", 'as' => "users."], function() {
+            Route::get('/',  ['as' => "index", 'uses' => "UserController@index"]);
+        });
     });
 });
