@@ -12,13 +12,14 @@ import { Stack } from "@chakra-ui/react"
 import { Spinner } from "@chakra-ui/react"
 import { PasswordInput } from "@/components/ui/password-input"
 import { FaEnvelopeOpen } from "react-icons/fa"
-import { FcGoogle } from "react-icons/fc"
+// import { FcGoogle } from "react-icons/fc"
 import { FormEvent } from "react"
 import { Link } from "@inertiajs/react"
 import { useForm }from "@inertiajs/react"
 import { Head } from "@inertiajs/react"
 import { useRoute } from "@ziggy"
 import { usePage } from "@inertiajs/react"
+import { PiHandWaving } from "react-icons/pi"
 import type { PageProps as InertiaPageProps } from "@inertiajs/core"
 
 interface PageProps extends InertiaPageProps{
@@ -51,15 +52,18 @@ export default function AuthLogin({ values }: { values: any }){
                             <Icon as={FaEnvelopeOpen} boxSize={7} color="cyan.600" />
                             <Heading size="3xl" color="gray.700">MetroStay</Heading>
                         </Box>
-                        <Text textStyle="sm" textAlign="center" my={4} color="gray.500">Glad to see you again <br/> Login to your account below</Text>
-                        <Center>
+                        <Text textStyle="sm" textAlign="center" my={4} color="gray.500">
+                            Glad to see you again <br/> Login to your admin account below. 
+                            <Icon as={PiHandWaving} boxSize={4} color="yellow.600" ml={1} />
+                        </Text>
+                        {/* <Center>
                             <Button w={'full'} variant={'outline'}>
                                 <Center gap={2}>
                                     <FcGoogle />
                                     <Text color="gray.700">Sign in with Google</Text>
                                 </Center>
                             </Button>
-                        </Center>
+                        </Center> */}
                         <Center mt={4}>
                             <form onSubmit={handleSubmit} style={{ width: "100%" }}>
                                 <Stack spaceY="4" w="100%">

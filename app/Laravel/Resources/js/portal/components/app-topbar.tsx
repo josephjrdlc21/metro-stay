@@ -1,4 +1,4 @@
-import { useSidebar } from "@portal/context/SidebarContext"
+import { useSidebar } from "@portal/context/sidebar-context"
 import { Box, Flex } from "@chakra-ui/react"
 import { IconButton } from "@chakra-ui/react"
 import { Avatar } from "@chakra-ui/react"
@@ -9,7 +9,10 @@ import { Icon } from "@chakra-ui/react"
 import { Menu } from "@chakra-ui/react"
 import { Portal } from "@chakra-ui/react"
 import { TfiLayoutListPost } from "react-icons/tfi"
-import { TfiMenu } from "react-icons/tfi"
+import { AiOutlineMenu } from "react-icons/ai"
+import { AiOutlineLock } from "react-icons/ai"
+import { AiOutlineLogout } from "react-icons/ai"
+import { AiOutlineUserSwitch } from "react-icons/ai"
 import { Link } from "@chakra-ui/react"
 import { useRoute } from "@ziggy"
 
@@ -26,15 +29,15 @@ export default function AppTopbar(){
             bg="white"
         >
             <Flex align="center" justifyContent="space-between" h="full">
-                <Flex>
-                    <IconButton aria-label="Search database" variant="outline" mx="3" bg="cyan.100" color="cyan.700" border="none" rounded="lg"
+                <Flex align="center">
+                    <IconButton aria-label="Search database" variant="outline" mx="3" bg="cyan.100" color="cyan.700" border="none" rounded="lg" size="sm"
                         onClick={toggleSidebar}
                         _hover={{
                             color: "gray.100",
                             bg: "cyan.700",
                         }}
                     >
-                        <Icon as={TfiMenu} />
+                        <Icon as={AiOutlineMenu} />
                     </IconButton>
                     <InputGroup flex="1" startElement={<LuSearch />} mx="3" endElement={<Icon as={TfiLayoutListPost} color="cyan.700" />} w={{ base: "180px", md: "300px" }}>
                         <Input placeholder="Search" rounded="lg"/>
@@ -51,13 +54,30 @@ export default function AppTopbar(){
                         <Portal>
                             <Menu.Positioner>
                             <Menu.Content>
-                                <Menu.Item cursor="pointer" value="account">Account</Menu.Item>
-                                <Menu.Item cursor="pointer" value="settings">Settings</Menu.Item>
-                                <Menu.Item cursor="pointer" value="logout">
-                                    <Link href={route('portal.auth.logout')}>
-                                        Logout
-                                    </Link>
-                                </Menu.Item>
+                                <Menu.ItemGroup>
+                                    <Menu.ItemGroupLabel>Segun Adebayo</Menu.ItemGroupLabel>
+                                    <Menu.Item display="flex" alignItems="center" cursor="pointer" value="bold">
+                                        <Icon boxSize={4} as={AiOutlineUserSwitch} />
+                                        <Link href="#"  style={{ border: "0px", outline: "none", boxShadow: "none", textDecoration: "none", color: "inherit"}}>
+                                            Profile
+                                        </Link>
+                                    </Menu.Item>
+                                </Menu.ItemGroup>
+                                <Menu.Separator />
+                                <Menu.ItemGroup>
+                                    <Menu.Item display="flex" alignItems="center" cursor="pointer" value="settings">
+                                        <Icon boxSize={4} as={AiOutlineLock} />
+                                        <Link href="#"  style={{ border: "0px", outline: "none", boxShadow: "none", textDecoration: "none", color: "inherit"}}>
+                                            Change Password
+                                        </Link>  
+                                    </Menu.Item>
+                                    <Menu.Item display="flex" alignItems="center" cursor="pointer" value="logout">
+                                        <Icon boxSize={4} as={AiOutlineLogout} />
+                                        <Link href={route('portal.auth.logout')}  style={{ border: "0px", outline: "none", boxShadow: "none", textDecoration: "none", color: "inherit"}}>
+                                            Logout
+                                        </Link>
+                                    </Menu.Item>
+                                </Menu.ItemGroup>
                             </Menu.Content>
                             </Menu.Positioner>
                         </Portal>
