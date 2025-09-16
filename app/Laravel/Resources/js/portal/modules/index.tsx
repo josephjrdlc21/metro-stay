@@ -14,7 +14,7 @@ export default function Index({ values }: { values: any }){
             <Card.Root size="sm">
                 <Card.Body>
                     <Flex justify="space-between" align="center">
-                        <Heading color="gray.700" size="xl">Dashboard</Heading>
+                        <Heading _dark={{ color: "gray.300" }} color="gray.700" size="xl">Dashboard</Heading>
                         <Breadcrumb.Root>
                             <Breadcrumb.List>
                                 <Breadcrumb.Item>

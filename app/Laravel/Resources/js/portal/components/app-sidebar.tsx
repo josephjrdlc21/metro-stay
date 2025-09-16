@@ -33,7 +33,7 @@ export default function AppSidebar(){
             }}
             h="full"
             borderRight="1px"
-            bg="white"
+            bg="bg.surface"
             transition="all 0.3s ease-in-out"
             zIndex={{ base: "overlay", md: "auto" }}
             pos={{ base: "fixed", md: "relative" }}
@@ -43,7 +43,7 @@ export default function AppSidebar(){
             {/* Logo */}
             <Box display={{ base: isOpen ? "flex" : "none", md: "flex", lg: "flex"}} justifyContent={{ base: isOpen ? "flex-start" : "none", md: isOpen ? "flex-start" : "center", lg: isOpen ? "center" : "flex-start"}} alignItems="center" gap={2} p={5}>
                 <Icon as={FaEnvelopeOpen} boxSize={6} color="cyan.600"/>
-                <Text fontSize="2xl" fontWeight="semibold" color="gray.700" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
+                <Text fontSize="2xl" fontWeight="semibold" _dark={{ color: "gray.100" }} color="gray.700" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
                     MetroStay
                 </Text>
             </Box>
@@ -63,11 +63,11 @@ export default function AppSidebar(){
                     },
                 }}
             >
-                <Text fontSize="sm" fontWeight="semibold" color="gray.700" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
+                <Text fontSize="sm" fontWeight="semibold" _dark={{ color: "gray.200" }} color="gray.700" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
                     Handy Tool
                 </Text>
                 <VStack align="start" w="full" mt={2}>
-                    <Box display="flex" alignItems="center" color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
+                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
                         transition="all 0.2s ease-in-out" role="group" _hover={{
                         bg: "cyan.600",
                         cursor: "pointer",
@@ -84,12 +84,12 @@ export default function AppSidebar(){
 
                 <Stack w="full">
                     <Separator mt={2} mb={4}/>
-                    <Text fontSize="sm" fontWeight="semibold" color="gray.700" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
+                    <Text fontSize="sm" fontWeight="semibold" _dark={{ color: "gray.200" }} color="gray.700" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
                         Navigation
                     </Text>
                 </Stack>
                 <VStack align="start" w="full" mt={2}>
-                    <Box display="flex" alignItems="center" color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
+                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
                         transition="all 0.2s ease-in-out" role="group" _hover={{
                         bg: "cyan.600",
                         cursor: "pointer",
@@ -102,7 +102,7 @@ export default function AppSidebar(){
                             </Text>
                         </Link>
                     </Box>
-                    <Box gap={3} px={3} py={3} w="full" rounded="md" color="gray.600"
+                    <Box gap={3} px={3} py={3} w="full" rounded="md" _dark={{ color: "gray.300" }} color="gray.600"
                         transition="all 0.2s ease-in-out" role="group" _hover={{
                         bg: "cyan.600",
                         cursor: "pointer",
@@ -115,7 +115,7 @@ export default function AppSidebar(){
                             </Text>
                         </Link>
                     </Box>
-                    <Box display="flex" alignItems="center" color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
+                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
                         transition="all 0.2s ease-in-out" role="group" _hover={{
                         bg: "cyan.600",
                         cursor: "pointer",
@@ -128,7 +128,7 @@ export default function AppSidebar(){
                             </Text>
                         </Link>
                     </Box>
-                    <Box display="flex" alignItems="center" color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
+                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
                         transition="all 0.2s ease-in-out" role="group" _hover={{
                         bg: "cyan.600",
                         cursor: "pointer",
@@ -141,7 +141,7 @@ export default function AppSidebar(){
                             </Text>
                         </Link>
                     </Box>
-                    <Box display="flex" alignItems="center" color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
+                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
                         transition="all 0.2s ease-in-out" role="group" _hover={{
                         bg: "cyan.600",
                         cursor: "pointer",
@@ -154,7 +154,7 @@ export default function AppSidebar(){
                             </Text>
                         </Link>
                     </Box>
-                    <Box display="flex" alignItems="center" color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
+                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
                         transition="all 0.2s ease-in-out" role="group" _hover={{
                         bg: "cyan.600",
                         cursor: "pointer",
@@ -167,7 +167,7 @@ export default function AppSidebar(){
                             </Text>
                         </Link>
                     </Box>
-                    <Box display="flex" alignItems="center" color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
+                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
                         transition="all 0.2s ease-in-out" role="group" _hover={{
                         bg: "cyan.600",
                         cursor: "pointer",
@@ -180,7 +180,7 @@ export default function AppSidebar(){
                             </Text>
                         </Link>
                     </Box>
-                    <Box display="flex" alignItems="center" color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
+                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
                         transition="all 0.2s ease-in-out" role="group" _hover={{
                         bg: "cyan.600",
                         cursor: "pointer",
@@ -197,12 +197,12 @@ export default function AppSidebar(){
 
                 <Stack w="full">
                     <Separator mt={2} mb={4}/>
-                    <Text fontSize="sm" fontWeight="semibold" color="gray.700" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
+                    <Text fontSize="sm" fontWeight="semibold" _dark={{ color: "gray.200" }} color="gray.700" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
                         Content Control
                     </Text>
                 </Stack>
                 <VStack align="start" w="full" mt={2}>
-                    <Box display="flex" alignItems="center" color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
+                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
                         transition="all 0.2s ease-in-out" role="group" _hover={{
                         bg: "cyan.600",
                         cursor: "pointer",
@@ -215,7 +215,7 @@ export default function AppSidebar(){
                             </Text>
                         </Link>
                     </Box>
-                    <Box display="flex" alignItems="center" color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
+                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
                         transition="all 0.2s ease-in-out" role="group" _hover={{
                         bg: "cyan.600",
                         cursor: "pointer",
@@ -232,12 +232,12 @@ export default function AppSidebar(){
 
                 <Stack w="full">
                     <Separator mt={2} mb={4}/>
-                    <Text fontSize="sm" fontWeight="semibold" color="gray.700" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
+                    <Text fontSize="sm" fontWeight="semibold" _dark={{ color: "gray.200" }} color="gray.700" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
                         Setting
                     </Text>
                 </Stack>
                 <VStack align="start" w="full" mt={2}>
-                    <Box display="flex" alignItems="center" color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
+                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
                         transition="all 0.2s ease-in-out" role="group" _hover={{
                         bg: "cyan.600",
                         cursor: "pointer",

@@ -53,9 +53,7 @@ export default function AuthLogin({ values }: { values: any }){
                             <Heading size="3xl" color="gray.700">MetroStay</Heading>
                         </Box>
                         <Text textStyle="sm" textAlign="center" my={4} color="gray.500">
-                            Glad to see you again <br/> Login to your admin account below. 
-                            <Icon as={PiHandWaving} boxSize={4} color="yellow.600" ml={1} />
-                        </Text>
+                            Glad to see you again <Icon as={PiHandWaving} boxSize={4} color="yellow.600" /> <br/> Login to your admin account below.                        </Text>
                         {/* <Center>
                             <Button w={'full'} variant={'outline'}>
                                 <Center gap={2}>

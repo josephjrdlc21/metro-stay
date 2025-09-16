@@ -8,6 +8,7 @@ import { LuSearch } from "react-icons/lu"
 import { Icon } from "@chakra-ui/react"
 import { Menu } from "@chakra-ui/react"
 import { Portal } from "@chakra-ui/react"
+import { ColorModeButton } from "@/components/ui/color-mode"
 import { TfiLayoutListPost } from "react-icons/tfi"
 import { AiOutlineMenu } from "react-icons/ai"
 import { AiOutlineLock } from "react-icons/ai"
@@ -26,7 +27,7 @@ export default function AppTopbar(){
             w="full"
             h="76px"
             borderBottom="1px"
-            bg="white"
+            bg="bg.surface"
         >
             <Flex align="center" justifyContent="space-between" h="full">
                 <Flex align="center">
@@ -36,6 +37,7 @@ export default function AppTopbar(){
                             color: "gray.100",
                             bg: "cyan.700",
                         }}
+                        _dark={{ color: "gray.100", bg: "cyan.700" }}
                     >
                         <Icon as={AiOutlineMenu} />
                     </IconButton>
@@ -44,7 +46,8 @@ export default function AppTopbar(){
                     </InputGroup>
                 </Flex>
                 <Flex px={4}>
-                    <Menu.Root positioning={{ placement: "right-end" }}>
+                    <ColorModeButton mx={3}/>
+                    <Menu.Root>
                         <Menu.Trigger rounded="full" focusRing="outside">
                             <Avatar.Root size="sm" cursor="pointer">
                                 <Avatar.Fallback name="Segun Adebayo" />

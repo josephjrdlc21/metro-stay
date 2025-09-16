@@ -17,7 +17,7 @@ export default function MainLayout({ children }: PropsWithChildren){
                     {/* Topbar */}
                     <AppTopbar />
                     {/* Page content */}
-                    <Box flex="1" p={4} bg="gray.100" rounded="xl">
+                    <Box flex="1" p={4} _dark={{ bg: "black" }} bg="gray.100" rounded="xl">
                         {children}
                     </Box>
                     {/* Footer */}
