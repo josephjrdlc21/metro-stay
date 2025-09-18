@@ -42,7 +42,7 @@ class UserList{
             });
         })
         ->latest()
-        //->where('id', '!=', '1')
+        ->where('id', '!=', '1')
         ->paginate($this->per_page);
 
         return ['record' => $record];

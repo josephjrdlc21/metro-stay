@@ -17,7 +17,7 @@ import { AiOutlineBlock } from "react-icons/ai"
 import { AiOutlineFileDone } from "react-icons/ai"
 import { AiOutlineUserSwitch } from "react-icons/ai"
 import { AiOutlineFieldTime } from "react-icons/ai"
-import { Link } from "@inertiajs/react"
+import { Link, usePage } from "@inertiajs/react"
 import { useRoute } from "@ziggy"
 import { useSidebar } from "@portal/context/sidebar-context"
 
@@ -25,6 +25,7 @@ export default function AppSidebar(){
     const route = useRoute();
 
     const { isOpen, sidebarRef } = useSidebar();
+    const { url } = usePage();
 
     return(
         <Box
@@ -71,7 +72,7 @@ export default function AppSidebar(){
                     Handy Tool
                 </Text>
                 <VStack align="start" w="full" mt={2}>
-                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
+                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color={url === '/admin' ? "white" : 'gray.600'} gap={3} px={3} py={3} w="full" rounded="md" bg={url === '/admin' ? "cyan.600" : ''}
                         transition="all 0.2s ease-in-out" role="group" _hover={{
                         bg: "cyan.600",
                         cursor: "pointer",
@@ -93,7 +94,7 @@ export default function AppSidebar(){
                     </Text>
                 </Stack>
                 <VStack align="start" w="full" mt={2}>
-                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
+                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color={url === '/admin/users' ? "white" : 'gray.600'} gap={3} px={3} py={3} w="full" rounded="md" bg={url === '/admin/users' ? "cyan.600" : ''}
                         transition="all 0.2s ease-in-out" role="group" _hover={{
                         bg: "cyan.600",
                         cursor: "pointer",

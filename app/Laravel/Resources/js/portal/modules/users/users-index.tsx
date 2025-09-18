@@ -1,4 +1,5 @@
 import MainLayout from "@portal/layouts/main-layout"
+import AppNotification from "@portal/components/app-notification"
 import { Card } from "@chakra-ui/react"
 import { Heading } from "@chakra-ui/react"
 import { Breadcrumb } from "@chakra-ui/react"
@@ -11,20 +12,23 @@ import { Menu } from "@chakra-ui/react"
 import { Portal } from "@chakra-ui/react"
 import { IconButton, Button } from "@chakra-ui/react"
 import { Box, HStack } from "@chakra-ui/react"
-import { Field, Input, Select, createListCollection } from "@chakra-ui/react"
+import { Field, Input, NativeSelect } from "@chakra-ui/react"
 import { Grid } from "@chakra-ui/react"
 import { RiSearch2Line, RiResetRightLine, RiAddCircleLine } from "react-icons/ri"
 import { statusBadgeClass } from "@portal/utils/helper"
+import { useRoute } from "@ziggy"
+import { Link, usePage } from "@inertiajs/react"
+import type { PageProps as InertiaPageProps } from "@inertiajs/core"
+
+interface PageProps extends InertiaPageProps{
+    flash: any
+}
 
 export default function UsersIndex({ values }: { values: any }){
     //console.log(values);
+    const route = useRoute();
 
-    const statuses = createListCollection({
-        items: [
-            { label: "Active", value: "active" },
-            { label: "Inactive", value: "inactive" },
-        ],
-    })
+    const { flash } = usePage<PageProps>().props;
 
     return(
         <MainLayout>
@@ -32,7 +36,7 @@ export default function UsersIndex({ values }: { values: any }){
 
             <Card.Root size="sm">
                 <Card.Body>
-                    <Flex justify="space-between" align="center">
+                    <Flex justify={{ base: "flex-start", md: "space-between" }} align="center" direction={{ base: "column", md: "row" }}>
                         <Heading _dark={{ color: "gray.300" }} color="gray.700" size="xl">Users</Heading>
                         <Breadcrumb.Root>
                             <Breadcrumb.List>
@@ -57,36 +61,23 @@ export default function UsersIndex({ values }: { values: any }){
 
             <Card.Root size="sm" mt={5}>
                 <Card.Body>
-                    <Grid templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(4, 1fr)" }} gap={3} mb={3}>
+                    {flash.message && <AppNotification status={flash.status} title={flash.message}/>}
+                    <Grid templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(4, 1fr)" }} gap={3} mb={3} mt={flash.message ? 3 : 0}>
                         <Field.Root>
                             <Field.Label>Search</Field.Label>
                             <Input name="name" placeholder="e.g., Name, Email"/>
                         </Field.Root>
 
-                        <Select.Root collection={statuses}>
-                            <Select.HiddenSelect />
-                            <Select.Label>Status</Select.Label>
-                            <Select.Control>
-                                <Select.Trigger>
-                                    <Select.ValueText placeholder="Select Status" />
-                                </Select.Trigger>
-                                <Select.IndicatorGroup>
-                                    <Select.Indicator />
-                                </Select.IndicatorGroup>
-                            </Select.Control>
-                            <Portal>
-                                <Select.Positioner>
-                                    <Select.Content>
-                                        {statuses.items.map((statuses) => (
-                                            <Select.Item item={statuses} key={statuses.value}>
-                                                {statuses.label}
-                                                <Select.ItemIndicator />
-                                            </Select.Item>
-                                        ))}
-                                    </Select.Content>
-                                </Select.Positioner>
-                            </Portal>
-                        </Select.Root>
+                        <Field.Root>
+                            <Field.Label>Status </Field.Label>
+                            <NativeSelect.Root>
+                                <NativeSelect.Field>
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                </NativeSelect.Field>
+                                <NativeSelect.Indicator />
+                            </NativeSelect.Root>
+                        </Field.Root>
 
                         <Field.Root>
                             <Field.Label>From</Field.Label>
@@ -100,10 +91,10 @@ export default function UsersIndex({ values }: { values: any }){
                     </Grid>
 
                     <HStack mb={2}>
-                        <Button colorPalette="cyan" variant="subtle" size="sm">
+                        <Button colorPalette="cyan" variant="solid" size="sm">
                             <RiSearch2Line /> Filter
                         </Button>
-                        <Button colorPalette="gray" variant="subtle" size="sm">
+                        <Button colorPalette="gray" variant="solid" size="sm">
                             <RiResetRightLine /> Clear
                         </Button>
                     </HStack>
@@ -113,9 +104,11 @@ export default function UsersIndex({ values }: { values: any }){
                     <Flex justify="space-between" align="center" mb={3}>
                         <Heading _dark={{ color: "gray.300" }} color="gray.700" size="lg">User Records</Heading>
                         <HStack>
-                            <Button colorPalette="cyan" variant="subtle" size="sm">
-                                <RiAddCircleLine /> Add User
-                            </Button>
+                            <Link href={route('portal.users.create')}>
+                                <Button colorPalette="cyan" variant="solid" size="sm">
+                                    <RiAddCircleLine /> Add User
+                                </Button>
+                            </Link>
                         </HStack>
                     </Flex>
 

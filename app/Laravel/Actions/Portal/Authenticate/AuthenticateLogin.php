@@ -36,24 +36,12 @@ class AuthenticateLogin{
             if (Str::lower($account->status) !== "active") {
                 auth($this->guard)->logout();
 
-                return [
-                    'success' => false,
-                    'message' => "Account locked. Access to system was removed.",
-                    'status'  => "info",
-                ];
+                return ['success' => false, 'status'  => "info", 'message' => "Account locked. Access to system was removed."];
             }
 
-            return [
-                'success' => true,
-                'message' => "Welcome {$account->name}!",
-                'status'  => "success",
-            ];
+            return ['success' => true, 'status'  => "success", 'message' => "Welcome {$account->name}!"];
         }
 
-        return [
-            'success' => false,
-            'message' => "Invalid account credentials.",
-            'status'  => "failed",
-        ];
+        return ['success' => false, 'status'  => "failed", 'message' => "Invalid account credentials."];
     }
 }

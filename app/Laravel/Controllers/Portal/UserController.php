@@ -4,10 +4,10 @@ namespace App\Laravel\Controllers\Portal;
 
 use App\Laravel\Models\User;
 
-use App\Laravel\Actions\Portal\User\{UserList};
+use App\Laravel\Actions\Portal\User\{UserList, UserCreate};
 
 use App\Laravel\Requests\PageRequest;
-//use App\Laravel\Requests\Portal\UserRequest;
+use App\Laravel\Requests\Portal\UserRequest;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -17,6 +17,7 @@ use Carbon\Carbon;
 
 class UserController extends Controller{
     protected array $data = [];
+    protected array $request = [];
     protected ?int $per_page;
 
     public function __construct(){
@@ -49,5 +50,27 @@ class UserController extends Controller{
         $this->data['record'] = $result['record'];
 
         return inertia('modules/users/users-index', ['values' => $this->data]);
+    }
+
+    public function create(PageRequest $request): Response {
+        $this->data['page_title'] .= " - Create User";
+
+        return inertia('modules/users/users-create', ['values' => $this->data]);
+    }
+
+    public function store(UserRequest $request): RedirectResponse {
+        $this->request['name'] = $request->input('name');
+        $this->request['email'] = $request->input('email');
+
+        $action = new UserCreate(
+            $this->request
+        );
+
+        $result = $action->execute();
+
+        session()->flash('notification-status', $result['status']);
+        session()->flash('notification-msg', $result['message']);
+
+        return $result['success'] ? redirect()->route('portal.users.index') : redirect()->back();
     }
 }
