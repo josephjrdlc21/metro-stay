@@ -1,7 +1,7 @@
 import MainLayout from "@portal/layouts/main-layout"
 import AppNotification from "@portal/components/app-notification"
 import { Card } from "@chakra-ui/react"
-import { Heading } from "@chakra-ui/react"
+import { Heading, Text } from "@chakra-ui/react"
 import { Breadcrumb } from "@chakra-ui/react"
 import { Flex, Separator } from "@chakra-ui/react"
 import { LuHouse, LuEllipsisVertical } from "react-icons/lu"
@@ -125,7 +125,10 @@ export default function UsersIndex({ values }: { values: any }){
                             </Table.Header>
                             <Table.Body>
                                 <Table.Row>
-                                    <Table.Cell>Juan Dela Cruz</Table.Cell>
+                                    <Table.Cell>
+                                        <Text fontSize="sm" color="blue.500">00005</Text>
+                                        Juan Dela Cruz
+                                    </Table.Cell>
                                     <Table.Cell>Master Admin</Table.Cell>
                                     <Table.Cell>
                                         <Status.Root colorPalette={statusBadgeClass('active')}>

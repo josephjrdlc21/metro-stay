@@ -3,7 +3,7 @@ import { Box, Flex } from "@chakra-ui/react"
 import { IconButton } from "@chakra-ui/react"
 import { Avatar } from "@chakra-ui/react"
 import { InputGroup } from "@chakra-ui/react"
-import { Input } from "@chakra-ui/react"
+import { Input, Text } from "@chakra-ui/react"
 import { LuSearch } from "react-icons/lu"
 import { Icon } from "@chakra-ui/react"
 import { Menu } from "@chakra-ui/react"
@@ -58,7 +58,10 @@ export default function AppTopbar(){
                             <Menu.Positioner>
                                 <Menu.Content>
                                     <Menu.ItemGroup>
-                                        <Menu.ItemGroupLabel>Segun Adebayo</Menu.ItemGroupLabel>
+                                        <Menu.ItemGroupLabel>
+                                            Segun Adebayo
+                                            <Text textStyle="xs" fontWeight="light">master admin</Text>
+                                        </Menu.ItemGroupLabel>
                                         <Menu.Item display="flex" alignItems="center" cursor="pointer" value="bold">
                                             <Icon boxSize={4} as={AiOutlineUserSwitch} />
                                             <Link href="#"  style={{ border: "0px", outline: "none", boxShadow: "none", textDecoration: "none", color: "inherit"}}>
