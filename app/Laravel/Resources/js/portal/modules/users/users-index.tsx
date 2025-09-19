@@ -14,7 +14,7 @@ import { RiSearch2Line, RiResetRightLine, RiAddCircleLine } from "react-icons/ri
 import { useRoute } from "@ziggy"
 import { FormEvent } from "react"
 import { Head } from "@inertiajs/react"
-import { Link, usePage, useForm, router } from "@inertiajs/react"
+import { Link, usePage, useForm } from "@inertiajs/react"
 import type { PageProps as InertiaPageProps } from "@inertiajs/core"
 import { statusBadgeClass, dateTime, formatId } from "@portal/utils/helper"
 
@@ -46,7 +46,7 @@ export default function UsersIndex({ values }: { values: Values }){
     const route = useRoute();
 
     const { flash } = usePage<PageProps>().props;
-    const { data, setData, processing } = useForm<FormValues>({
+    const { data, setData, processing , get } = useForm<FormValues>({
         keyword: values.keyword ?? '',
         status: values.selected_status ?? '',
         start_date: values.start_date ?? '',
@@ -56,7 +56,7 @@ export default function UsersIndex({ values }: { values: Values }){
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        router.get(route('portal.users.index'), data);
+        get(route('portal.users.index'));
     };
 
     return(
