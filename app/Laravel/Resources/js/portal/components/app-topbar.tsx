@@ -1,21 +1,12 @@
-import { useSidebar } from "@portal/context/sidebar-context"
-import { Box, Flex } from "@chakra-ui/react"
-import { IconButton } from "@chakra-ui/react"
-import { Avatar } from "@chakra-ui/react"
-import { InputGroup } from "@chakra-ui/react"
-import { Input, Text } from "@chakra-ui/react"
-import { LuSearch } from "react-icons/lu"
-import { Icon } from "@chakra-ui/react"
-import { Menu } from "@chakra-ui/react"
-import { Portal } from "@chakra-ui/react"
-import { ColorModeButton } from "@/components/ui/color-mode"
-import { TfiLayoutListPost } from "react-icons/tfi"
-import { AiOutlineMenu } from "react-icons/ai"
-import { AiOutlineLock } from "react-icons/ai"
-import { AiOutlineLogout } from "react-icons/ai"
-import { AiOutlineUserSwitch } from "react-icons/ai"
-import { Link } from "@chakra-ui/react"
-import { useRoute } from "@ziggy"
+import { useRoute } from "@ziggy";
+import { useSidebar } from "@portal/context/sidebar-context";
+
+import {Avatar, Box, Flex, Icon, IconButton, Input, InputGroup,
+    Link, Menu, Portal, Text} from "@chakra-ui/react";
+import { ColorModeButton } from "@/components/ui/color-mode";
+import { LuSearch } from "react-icons/lu";
+import { TfiLayoutListPost } from "react-icons/tfi";
+import {AiOutlineMenu, AiOutlineLock, AiOutlineLogout, AiOutlineUserSwitch} from "react-icons/ai";
 
 export default function AppTopbar(){
     const route = useRoute();

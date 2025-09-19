@@ -1,10 +1,9 @@
-import MainLayout from "@portal/layouts/main-layout"
-import { Card } from "@chakra-ui/react"
-import { Heading } from "@chakra-ui/react"
-import { Breadcrumb } from "@chakra-ui/react"
-import { Flex } from "@chakra-ui/react"
-import { LuHouse } from "react-icons/lu"
 import { Head } from "@inertiajs/react"
+
+import MainLayout from "@portal/layouts/main-layout"
+
+import { Card, Heading, Breadcrumb, Flex} from "@chakra-ui/react"
+import { LuHouse } from "react-icons/lu"
 
 export default function Index({ values }: { values: any }){
     return (

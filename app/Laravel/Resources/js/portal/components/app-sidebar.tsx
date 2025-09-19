@@ -1,25 +1,12 @@
-import { Box } from "@chakra-ui/react"
-import { Icon } from "@chakra-ui/react"
-import { Text } from "@chakra-ui/react"
-import { VStack } from "@chakra-ui/react"
-import { Stack } from "@chakra-ui/react"
-import { Separator } from "@chakra-ui/react"
-import { FaEnvelopeOpen } from "react-icons/fa"
-import { AiOutlineDesktop } from "react-icons/ai"
-import { AiOutlineCalendar } from "react-icons/ai" 
-import { AiOutlineUser } from "react-icons/ai"
-import { AiOutlineTeam } from "react-icons/ai"
-import { AiOutlineWallet } from "react-icons/ai"
-import { AiOutlinePicCenter } from "react-icons/ai"
-import { AiOutlineCreditCard }from "react-icons/ai"
-import { AiOutlineBarChart } from "react-icons/ai"
-import { AiOutlineBlock } from "react-icons/ai"
-import { AiOutlineFileDone } from "react-icons/ai"
-import { AiOutlineUserSwitch } from "react-icons/ai"
-import { AiOutlineFieldTime } from "react-icons/ai"
-import { Link, usePage } from "@inertiajs/react"
-import { useRoute } from "@ziggy"
-import { useSidebar } from "@portal/context/sidebar-context"
+import { useRoute } from "@ziggy";
+import { Link, usePage } from "@inertiajs/react";
+import { useSidebar } from "@portal/context/sidebar-context";
+
+import {Box, Icon, Separator, Stack, Text, VStack,} from "@chakra-ui/react";
+import { FaEnvelopeOpen } from "react-icons/fa";
+import {AiOutlineBarChart, AiOutlineBlock, AiOutlineCalendar, AiOutlineCreditCard,
+    AiOutlineDesktop, AiOutlineFieldTime, AiOutlineFileDone, AiOutlinePicCenter,
+    AiOutlineTeam, AiOutlineUser, AiOutlineUserSwitch, AiOutlineWallet} from "react-icons/ai";
 
 export default function AppSidebar(){
     const route = useRoute();
@@ -35,7 +22,7 @@ export default function AppSidebar(){
                 md: isOpen ? "256px" : "80px",
                 lg: isOpen ? "80px" : "256px",
             }}
-            h="full"
+            h="100vh"
             borderRight="1px"
             bg="white"
             transition="all 0.3s ease-in-out"

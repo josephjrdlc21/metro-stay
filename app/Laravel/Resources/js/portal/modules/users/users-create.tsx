@@ -1,17 +1,16 @@
-import MainLayout from "@portal/layouts/main-layout"
-import AppNotification from "@portal/components/app-notification"
-
-import { Card, Text, Box, Button } from "@chakra-ui/react"
-import { Heading, Separator, Breadcrumb } from "@chakra-ui/react"
-import { Flex, Stack, Container } from "@chakra-ui/react"
-import { Field, Input, NativeSelect } from "@chakra-ui/react"
-import { FaTimes, FaRegPaperPlane  } from "react-icons/fa"
-import { LuHouse } from "react-icons/lu"
-
-import { useRoute } from "@ziggy"
 import { FormEvent } from "react"
+import { useRoute } from "@ziggy"
+
 import { Head, Link, usePage, useForm } from "@inertiajs/react"
 import type { PageProps as InertiaPageProps } from "@inertiajs/core"
+
+import MainLayout from "@portal/layouts/main-layout"
+import AppNotification from "@portal/components/app-notification"
+import {Box, Button, Card, Text, Heading, Separator,
+    Breadcrumb, Flex, Stack, Container, Field, Input,
+    NativeSelect} from "@chakra-ui/react";
+import { FaTimes, FaRegPaperPlane  } from "react-icons/fa"
+import { LuHouse } from "react-icons/lu"
 
 interface PageProps extends InertiaPageProps{
     flash: any

@@ -1,4 +1,4 @@
-import '../bootstrap';
+import './bootstrap';
 import { Provider } from "@/components/ui/provider"
 import { createInertiaApp } from '@inertiajs/react'
 import { createRoot } from 'react-dom/client'

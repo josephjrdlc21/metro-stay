@@ -1,22 +1,18 @@
+import { FormEvent } from "react";
+import { useRoute } from "@ziggy";
+
+import { Head, Link, usePage, useForm } from "@inertiajs/react";
+import type { PageProps as InertiaPageProps } from "@inertiajs/core";
+
+import { statusBadgeClass, dateTime, formatId } from "@portal/utils/helper"
+
 import MainLayout from "@portal/layouts/main-layout"
 import AppNotification from "@portal/components/app-notification"
-
-import { Heading, Text } from "@chakra-ui/react"
-import { Breadcrumb, Status } from "@chakra-ui/react"
-import { Flex, Separator } from "@chakra-ui/react"
-import { Card,Table, Menu } from "@chakra-ui/react"
-import { IconButton, Button } from "@chakra-ui/react"
-import { Box, HStack, Grid, Portal } from "@chakra-ui/react"
-import { Field, Input, NativeSelect } from "@chakra-ui/react"
-import { LuHouse, LuEllipsisVertical } from "react-icons/lu"
-import { RiSearch2Line, RiResetRightLine, RiAddCircleLine } from "react-icons/ri"
-
-import { useRoute } from "@ziggy"
-import { FormEvent } from "react"
-import { Head } from "@inertiajs/react"
-import { Link, usePage, useForm } from "@inertiajs/react"
-import type { PageProps as InertiaPageProps } from "@inertiajs/core"
-import { statusBadgeClass, dateTime, formatId } from "@portal/utils/helper"
+import {Heading, Text, Breadcrumb, Status, Flex, Separator,
+    Card, Table, Menu, IconButton, Button, Box, HStack,
+    Grid, Portal, Field, Input, NativeSelect} from "@chakra-ui/react";
+import { LuHouse, LuEllipsisVertical } from "react-icons/lu";
+import { RiSearch2Line, RiResetRightLine, RiAddCircleLine} from "react-icons/ri";
 
 interface Values {
     page_title: string,
