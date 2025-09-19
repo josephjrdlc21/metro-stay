@@ -24,7 +24,7 @@ class UserController extends Controller{
         parent::__construct();
         array_merge($this->data?:[], parent::get_data());
         $this->data['page_title'] .= " - Users";
-        $this->data['statuses'] = ['' => "Select Status", 'active' => "Active", 'inactive' => "Inactive"];
+        $this->data['statuses'] = ['active' => "Active", 'inactive' => "Inactive"];
         $this->per_page = env("DEFAULT_PER_PAGE", 10);
     }
 
@@ -34,7 +34,7 @@ class UserController extends Controller{
         $this->data['keyword'] = Str::lower($request->get('keyword'));
         $this->data['selected_status'] = $request->get('status');
 
-        $first_record = User::oldest()->first();
+        $first_record = User::where('id', '!=', '1')->oldest()->first();
         $start_date = $first_record ? $request->get('start_date', $first_record->created_at->format("Y-m-d")) : $request->get('start_date', now()->startOfMonth());
         
         $this->data['start_date'] = Carbon::parse($start_date)->format("Y-m-d");

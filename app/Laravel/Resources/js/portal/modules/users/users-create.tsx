@@ -1,19 +1,16 @@
 import MainLayout from "@portal/layouts/main-layout"
 import AppNotification from "@portal/components/app-notification"
-import { Card, Text, Box } from "@chakra-ui/react"
-import { Heading, Separator } from "@chakra-ui/react"
-import { Breadcrumb } from "@chakra-ui/react"
-import { Flex, Stack } from "@chakra-ui/react"
-import { Container } from "@chakra-ui/react"
+
+import { Card, Text, Box, Button } from "@chakra-ui/react"
+import { Heading, Separator, Breadcrumb } from "@chakra-ui/react"
+import { Flex, Stack, Container } from "@chakra-ui/react"
 import { Field, Input, NativeSelect } from "@chakra-ui/react"
-import { Button } from "@chakra-ui/react"
 import { FaTimes, FaRegPaperPlane  } from "react-icons/fa"
 import { LuHouse } from "react-icons/lu"
-import { Head } from "@inertiajs/react"
-import { Link } from "@inertiajs/react"
-import { usePage, useForm } from "@inertiajs/react"
+
 import { useRoute } from "@ziggy"
 import { FormEvent } from "react"
+import { Head, Link, usePage, useForm } from "@inertiajs/react"
 import type { PageProps as InertiaPageProps } from "@inertiajs/core"
 
 interface PageProps extends InertiaPageProps{
@@ -112,8 +109,8 @@ export default function UsersCreate({ values }: { values: any }){
                         </Card.Body>
                         <Separator mt={4} mb={2} />
                         <Card.Footer display="flex" justifyContent="flex-end" pt={2} pb={4}>
-                            <Link href={route('portal.users.index')}>
-                                <Button variant="solid" colorPalette="red" size="sm">
+                            <Link href={route('portal.users.index')} disabled={processing}>
+                                <Button variant="solid" colorPalette="red" size="sm" disabled={processing}>
                                     <FaTimes/> Cancel
                                 </Button>
                             </Link>

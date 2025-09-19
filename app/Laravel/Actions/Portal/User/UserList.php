@@ -19,27 +19,18 @@ class UserList{
     }
 
     public function execute(): array {
-        $record = User::where(function ($query) {
-            if (strlen($this->data['keyword']) > 0) {
-                $query->whereRaw("LOWER(name) LIKE '%{$this->data['keyword']}%'")
-                    ->orWhereRaw("LOWER(email) LIKE '%{$this->data['keyword']}%'");
-            }
+        $record = User::when(strlen($this->data['keyword']) > 0, function ($query) {
+            $query->whereRaw("LOWER(name) LIKE '%{$this->data['keyword']}%'")
+                ->orWhereRaw("LOWER(email) LIKE '%{$this->data['keyword']}%'");
         })
-        ->where(function ($query) {
-            if (strlen($this->data['selected_status']) > 0) {
-                $query->where('status', $this->data['selected_status']);
-            }
+        ->when(strlen($this->data['selected_status']) > 0, function ($query) {
+            $query->where('status', $this->data['selected_status']);
         })
-        ->where(function ($query) {
-            $query->where(function ($q) {
-                if (strlen($this->data['start_date']) > 0) {
-                    $q->whereDate('created_at', '>=', Carbon::parse($this->data['start_date'])->format("Y-m-d"));
-                }
-            })->where(function ($q) {
-                if (strlen($this->data['end_date']) > 0) {
-                    $q->whereDate('created_at', '<=', Carbon::parse($this->data['end_date'])->format("Y-m-d"));
-                }
-            });
+        ->when(strlen($this->data['start_date']) > 0, function ($query) {
+            $query->whereDate('created_at', '>=', Carbon::parse($this->data['start_date'])->format("Y-m-d"));
+        })
+        ->when(strlen($this->data['end_date']) > 0, function ($query) {
+            $query->whereDate('created_at', '<=', Carbon::parse($this->data['end_date'])->format("Y-m-d"));
         })
         ->latest()
         ->where('id', '!=', '1')
