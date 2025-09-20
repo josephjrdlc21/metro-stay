@@ -1,10 +1,11 @@
+import { PropsWithChildren } from "react"
+
+import { SidebarProvider } from "@portal/context/sidebar-context"
+
 import AppSidebar from "@portal/components/app-sidebar"
 import AppTopbar from "@portal/components/app-topbar"
 import AppFooter from "@portal/components/app-footer"
-import { SidebarProvider } from "@portal/context/sidebar-context"
-import { Box } from "@chakra-ui/react"
-import { Flex } from "@chakra-ui/react"
-import { PropsWithChildren } from "react"
+import { Box, Flex } from "@chakra-ui/react"
 
 export default function MainLayout({ children }: PropsWithChildren){
     return(
@@ -12,8 +13,9 @@ export default function MainLayout({ children }: PropsWithChildren){
             <Flex 
                 minH="100vh" 
                 fontFamily="'Roboto', sans-serif"
-                w="100vw"
+                w="full"
                 overflowX="hidden"
+                _dark={{ bg: "gray.900" }} 
             >
                 {/* Sidebar */}
                 <AppSidebar />

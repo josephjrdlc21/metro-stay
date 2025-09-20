@@ -14,7 +14,13 @@ import { LuHouse } from "react-icons/lu"
 
 interface Values {
     page_title: string,
+    user: {
+        id: number,
+        name: string,
+        email: string,
+    }
 }
+
 interface PageProps extends InertiaPageProps{
     flash: any
 }
@@ -24,19 +30,19 @@ type FormValues = {
     email: string
 }
 
-export default function UsersCreate({ values }: { values: Values }){
+export default function UsersEdit({ values }: { values: Values }){
     const route = useRoute();
 
     const { flash } = usePage<PageProps>().props;
     const { data, setData, post, processing, errors } = useForm<FormValues>({
-        name: '',
-        email: '',
+        name: values.user.name ?? '',
+        email: values.user.email ?? '',
     });
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        post(route('portal.users.create'))
+        post(route('portal.users.edit', values.user.id))
     };
 
     return(
@@ -64,7 +70,7 @@ export default function UsersCreate({ values }: { values: Values }){
                                 </Breadcrumb.Item>
                                 <Breadcrumb.Separator />
                                 <Breadcrumb.Item>
-                                    <Breadcrumb.CurrentLink>Create User</Breadcrumb.CurrentLink>
+                                    <Breadcrumb.CurrentLink>Edit User</Breadcrumb.CurrentLink>
                                 </Breadcrumb.Item>
                             </Breadcrumb.List>
                         </Breadcrumb.Root>
@@ -76,7 +82,7 @@ export default function UsersCreate({ values }: { values: Values }){
                 <form onSubmit={handleSubmit} style={{ width: "100%" }}>
                     <Card.Root size="sm">
                         <Card.Header pb={2}>
-                            <Heading _dark={{ color: "gray.300" }} color="gray.700" size="md">Create user form</Heading>
+                            <Heading _dark={{ color: "gray.300" }} color="gray.700" size="md">Edit user form</Heading>
                             <Text _dark={{ color: "gray.500" }} color="gray.500" textStyle="xs">Fill up the ( * ) required fields before submitting the form.</Text>
                             {flash.message && <AppNotification status={flash.status} title={flash.message}/>}
                         </Card.Header>
@@ -122,7 +128,7 @@ export default function UsersCreate({ values }: { values: Values }){
                                 </Button>
                             </Link>
                             <Button type="submit" variant="solid" colorPalette="cyan" size="sm" loading={processing}>
-                                <FaRegPaperPlane/>  Submit
+                                <FaRegPaperPlane/>  Save
                             </Button>
                         </Card.Footer>
                     </Card.Root>

@@ -4,7 +4,8 @@ namespace App\Laravel\Controllers\Portal;
 
 use App\Laravel\Models\User;
 
-use App\Laravel\Actions\Portal\User\{UserList, UserCreate};
+use App\Laravel\Actions\Portal\User\{UserList, UserCreate, UserUpdate, 
+    UserUpdateStatus};
 
 use App\Laravel\Requests\PageRequest;
 use App\Laravel\Requests\Portal\UserRequest;
@@ -63,6 +64,67 @@ class UserController extends Controller{
         $this->request['email'] = $request->input('email');
 
         $action = new UserCreate(
+            $this->request
+        );
+
+        $result = $action->execute();
+
+        session()->flash('notification-status', $result['status']);
+        session()->flash('notification-msg', $result['message']);
+
+        return $result['success'] ? redirect()->route('portal.users.index') : redirect()->back();
+    }
+
+    public function edit(PageRequest $request, ?int $id = null): Response|RedirectResponse {
+        $this->data['page_title'] .= " - Edit User";
+
+        $this->data['user'] = User::find($id);
+
+        if(!$this->data['user']){
+            session()->flash('notification-status', 'failed');
+            session()->flash('notification-msg', "Record not found.");
+
+            return redirect()->route('portal.users.index');
+        }
+
+        return inertia('modules/users/users-edit', ['values' => $this->data]);
+    }
+
+    public function update(UserRequest $request, ?int $id = null): RedirectResponse {
+        if(!User::find($id)){
+            session()->flash('notification-status', 'failed');
+            session()->flash('notification-msg', "Record not found.");
+
+            return redirect()->route('portal.users.index');
+        }
+
+        $this->request['id'] = $id;
+        $this->request['name'] = $request->input('name');
+        $this->request['email'] = $request->input('email');
+
+        $action = new UserUpdate(
+            $this->request
+        );
+
+        $result = $action->execute();
+
+        session()->flash('notification-status', $result['status']);
+        session()->flash('notification-msg', $result['message']);
+
+        return $result['success'] ? redirect()->route('portal.users.index') : redirect()->back();
+    }
+
+    public function update_status(PageRequest $request, $id=null): RedirectResponse {
+        if(!User::find($id)){
+            session()->flash('notification-status', 'failed');
+            session()->flash('notification-msg', "Record not found.");
+
+            return redirect()->route('portal.users.index');
+        }
+
+        $this->request['id'] = $id;
+        
+        $action = new UserUpdateStatus(
             $this->request
         );
 

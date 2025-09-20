@@ -1,18 +1,20 @@
-import { FormEvent } from "react";
-import { useRoute } from "@ziggy";
+import { FormEvent } from "react"
+import { useRoute } from "@ziggy"
 
-import { Head, Link, usePage, useForm } from "@inertiajs/react";
-import type { PageProps as InertiaPageProps } from "@inertiajs/core";
+import { Head, Link, usePage, useForm, router } from "@inertiajs/react"
+import type { PageProps as InertiaPageProps } from "@inertiajs/core"
 
 import { statusBadgeClass, dateTime, formatId } from "@portal/utils/helper"
 
 import MainLayout from "@portal/layouts/main-layout"
 import AppNotification from "@portal/components/app-notification"
+import AppPagination from "@portal/components/app-pagination"
 import {Heading, Text, Breadcrumb, Status, Flex, Separator,
     Card, Table, Menu, IconButton, Button, Box, HStack,
-    Grid, Portal, Field, Input, NativeSelect} from "@chakra-ui/react";
-import { LuHouse, LuEllipsisVertical } from "react-icons/lu";
-import { RiSearch2Line, RiResetRightLine, RiAddCircleLine} from "react-icons/ri";
+    Grid, Portal, Field, Input, NativeSelect} from "@chakra-ui/react"
+import { LuHouse, LuEllipsisVertical } from "react-icons/lu"
+import { RiSearch2Line, RiResetRightLine, RiAddCircleLine} from "react-icons/ri"
+import Swal from "sweetalert2"
 
 interface Values {
     page_title: string,
@@ -23,6 +25,7 @@ interface Values {
     end_date: string
     record: {
         data: any[],
+        links: any[],
     }
 }
 interface PageProps extends InertiaPageProps{
@@ -38,11 +41,10 @@ type FormValues = {
 }
 
 export default function UsersIndex({ values }: { values: Values }){
-    // console.log(values);
     const route = useRoute();
 
     const { flash } = usePage<PageProps>().props;
-    const { data, setData, processing , get } = useForm<FormValues>({
+    const { data, setData, processing, get } = useForm<FormValues>({
         keyword: values.keyword ?? '',
         status: values.selected_status ?? '',
         start_date: values.start_date ?? '',
@@ -181,7 +183,14 @@ export default function UsersIndex({ values }: { values: Values }){
                                                     <Portal>
                                                         <Menu.Positioner>
                                                             <Menu.Content>
-                                                                <Menu.Item cursor="pointer" value="edit">Edit</Menu.Item>
+                                                                <Menu.Item cursor="pointer" value="edit">
+                                                                    <Link href={route('portal.users.edit', user.id)}  style={{ border: "0px", outline: "none", boxShadow: "none", textDecoration: "none", color: "inherit"}}>
+                                                                        Edit Details
+                                                                    </Link>
+                                                                </Menu.Item>
+                                                                <Menu.Item cursor="pointer" value="status">Deactivate User</Menu.Item>
+                                                                <Menu.Item cursor="pointer" value="reset">Reset Password</Menu.Item>
+                                                                <Menu.Item cursor="pointer" value="delete">Delete User</Menu.Item>
                                                             </Menu.Content>
                                                         </Menu.Positioner>
                                                     </Portal>
@@ -196,6 +205,10 @@ export default function UsersIndex({ values }: { values: Values }){
                                 )}
                             </Table.Body>
                         </Table.Root>
+                    </Box>
+                    <Separator />
+                    <Box overflowX="auto" mt={4}>
+                        <AppPagination links = {values.record.links} />
                     </Box>
                 </Card.Body>
             </Card.Root>

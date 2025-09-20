@@ -1,12 +1,12 @@
-import { useRoute } from "@ziggy";
-import { Link, usePage } from "@inertiajs/react";
-import { useSidebar } from "@portal/context/sidebar-context";
+import { useRoute } from "@ziggy"
+import { Link, usePage } from "@inertiajs/react"
+import { useSidebar } from "@portal/context/sidebar-context"
 
-import {Box, Icon, Separator, Stack, Text, VStack,} from "@chakra-ui/react";
-import { FaEnvelopeOpen } from "react-icons/fa";
+import {Box, Icon, Separator, Stack, Text, VStack,} from "@chakra-ui/react"
+import { FaEnvelopeOpen } from "react-icons/fa"
 import {AiOutlineBarChart, AiOutlineBlock, AiOutlineCalendar, AiOutlineCreditCard,
     AiOutlineDesktop, AiOutlineFieldTime, AiOutlineFileDone, AiOutlinePicCenter,
-    AiOutlineTeam, AiOutlineUser, AiOutlineUserSwitch, AiOutlineWallet} from "react-icons/ai";
+    AiOutlineTeam, AiOutlineUser, AiOutlineUserSwitch, AiOutlineWallet} from "react-icons/ai"
 
 export default function AppSidebar(){
     const route = useRoute();
@@ -22,7 +22,7 @@ export default function AppSidebar(){
                 md: isOpen ? "256px" : "80px",
                 lg: isOpen ? "80px" : "256px",
             }}
-            h="100vh"
+            h="full"
             borderRight="1px"
             bg="white"
             transition="all 0.3s ease-in-out"

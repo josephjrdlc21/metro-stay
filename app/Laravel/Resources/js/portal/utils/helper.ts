@@ -23,6 +23,7 @@ export function dateTime(input: string): string {
     const date = new Date(input);
 
     return new Intl.DateTimeFormat("en-US", {
+        timeZone: "Asia/Singapore",
         month: "2-digit",
         day: "2-digit",
         year: "numeric",

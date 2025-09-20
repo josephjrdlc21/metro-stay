@@ -1,17 +1,17 @@
-import { FormEvent } from "react";
-import { useRoute } from "@ziggy";
+import { FormEvent } from "react"
+import { useRoute } from "@ziggy"
 
-import { Head, Link, useForm, usePage } from "@inertiajs/react";
-import type { PageProps as InertiaPageProps } from "@inertiajs/core";
+import { Head, Link, useForm, usePage } from "@inertiajs/react"
+import type { PageProps as InertiaPageProps } from "@inertiajs/core"
 
-import AuthLayout from "@portal/layouts/auth-layout";
-import AppNotification from "@portal/components/app-notification";
+import AuthLayout from "@portal/layouts/auth-layout"
+import AppNotification from "@portal/components/app-notification"
 import {Box, Button, Card, Center, Field, Heading, Icon, Input,
-    Spinner, Stack, Text} from "@chakra-ui/react";
-import { PasswordInput } from "@/components/ui/password-input";
-import { FaEnvelopeOpen } from "react-icons/fa";
+    Spinner, Stack, Text} from "@chakra-ui/react"
+import { PasswordInput } from "@/components/ui/password-input"
+import { FaEnvelopeOpen } from "react-icons/fa"
 // import { FcGoogle } from "react-icons/fc"
-import { PiHandWaving } from "react-icons/pi";
+import { PiHandWaving } from "react-icons/pi"
 
 interface PageProps extends InertiaPageProps{
     flash: any

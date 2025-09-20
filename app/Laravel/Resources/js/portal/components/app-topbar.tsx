@@ -1,12 +1,12 @@
-import { useRoute } from "@ziggy";
-import { useSidebar } from "@portal/context/sidebar-context";
+import { useRoute } from "@ziggy"
+import { useSidebar } from "@portal/context/sidebar-context"
 
 import {Avatar, Box, Flex, Icon, IconButton, Input, InputGroup,
-    Link, Menu, Portal, Text} from "@chakra-ui/react";
-import { ColorModeButton } from "@/components/ui/color-mode";
-import { LuSearch } from "react-icons/lu";
-import { TfiLayoutListPost } from "react-icons/tfi";
-import {AiOutlineMenu, AiOutlineLock, AiOutlineLogout, AiOutlineUserSwitch} from "react-icons/ai";
+    Link, Menu, Portal, Text} from "@chakra-ui/react"
+import { ColorModeButton } from "@/components/ui/color-mode"
+import { LuSearch } from "react-icons/lu"
+import { TfiLayoutListPost } from "react-icons/tfi"
+import {AiOutlineMenu, AiOutlineLock, AiOutlineLogout, AiOutlineUserSwitch} from "react-icons/ai"
 
 export default function AppTopbar(){
     const route = useRoute();

@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react"
 import { AbsoluteCenter } from "@chakra-ui/react"
 
-import { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react"
 
 export default function AuthLayout({ children }: PropsWithChildren){
     return(
