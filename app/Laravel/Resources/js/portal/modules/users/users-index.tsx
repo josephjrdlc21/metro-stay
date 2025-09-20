@@ -57,6 +57,51 @@ export default function UsersIndex({ values }: { values: Values }){
         get(route('portal.users.index'));
     };
 
+    const handleUpdateStatus = (id: number) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to update the status of this user.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, update it!',
+            cancelButtonText: 'No, cancel!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                router.get(route('portal.users.update_status', id));
+            }
+        });
+    }
+
+    const handleUpdatePassword = (id: number) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want reset the password of this user.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, reset it!',
+            cancelButtonText: 'No, cancel!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                router.get(route('portal.users.update_password', id));
+            }
+        });
+    }
+
+    const handleDeleteUser = (id: number) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to delete this user.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                router.delete(route('portal.users.delete', id));
+            }
+        });
+    }
+
     return(
         <MainLayout>
             <Head title={values.page_title}/>
@@ -188,9 +233,21 @@ export default function UsersIndex({ values }: { values: Values }){
                                                                         Edit Details
                                                                     </Link>
                                                                 </Menu.Item>
-                                                                <Menu.Item cursor="pointer" value="status">Deactivate User</Menu.Item>
-                                                                <Menu.Item cursor="pointer" value="reset">Reset Password</Menu.Item>
-                                                                <Menu.Item cursor="pointer" value="delete">Delete User</Menu.Item>
+                                                                <Menu.Item cursor="pointer" value="status" onClick={() => {
+                                                                    setTimeout(() => handleUpdateStatus(user.id), 0);
+                                                                }}>
+                                                                    {user.status == "active" ? "Deactivate User" : "Activate User"}
+                                                                </Menu.Item>
+                                                                <Menu.Item cursor="pointer" value="reset" onClick={() => {
+                                                                    setTimeout(() => handleUpdatePassword(user.id), 0);
+                                                                }}>
+                                                                    Reset Password
+                                                                </Menu.Item>
+                                                                <Menu.Item cursor="pointer" value="delete" onClick={() => {
+                                                                    setTimeout(() => handleDeleteUser(user.id), 0);
+                                                                }}>
+                                                                    Delete User
+                                                                </Menu.Item>
                                                             </Menu.Content>
                                                         </Menu.Positioner>
                                                     </Portal>

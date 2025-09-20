@@ -17,11 +17,15 @@ class UserUpdateStatus{
     }
 
     public function execute(): array {
+        $user = User::find($this->request['id']);
+
+        if(!$user){
+            return ['success' => false, 'status' => "failed", 'message' => "Record not found."];
+        }
+
         DB::beginTransaction();
         try {
-            $user = User::find($this->request['id']);
-            $user->name = Str::title($this->request['name']);
-            $user->email = Str::lower($this->request['email']);
+            $user->status = ($user->status == 'active') ? 'inactive' : 'active';
             $user->save();
 
             DB::commit();
@@ -31,6 +35,6 @@ class UserUpdateStatus{
             return ['success' => false, 'status' => "failed", 'message' => "Server Error: Code #{$e->getLine()}."];
         }
 
-        return ['success' => true, 'status'  => "success", 'message' => "User details has been updated."];
+        return ['success' => true, 'status'  => "success", 'message' => "User details status has been set to {$user->status}."];
     }
 }

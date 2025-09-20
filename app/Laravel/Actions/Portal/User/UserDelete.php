@@ -7,7 +7,7 @@ use App\Laravel\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class UserUpdate{
+class UserDelete{
     private array $request = [];
 
     public function __construct(
@@ -25,9 +25,7 @@ class UserUpdate{
 
         DB::beginTransaction();
         try {
-            $user->name = Str::title($this->request['name']);
-            $user->email = Str::lower($this->request['email']);
-            $user->save();
+            $user->delete();
 
             DB::commit();
         } catch (\Exception $e) {
@@ -36,6 +34,6 @@ class UserUpdate{
             return ['success' => false, 'status' => "failed", 'message' => "Server Error: Code #{$e->getLine()}."];
         }
 
-        return ['success' => true, 'status'  => "success", 'message' => "User details has been updated."];
+        return ['success' => true, 'status'  => "success", 'message' => "User has been deleted successfully."];
     }
 }

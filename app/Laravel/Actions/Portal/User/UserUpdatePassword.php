@@ -7,7 +7,7 @@ use App\Laravel\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class UserUpdate{
+class UserUpdatePassword{
     private array $request = [];
 
     public function __construct(
@@ -25,8 +25,9 @@ class UserUpdate{
 
         DB::beginTransaction();
         try {
-            $user->name = Str::title($this->request['name']);
-            $user->email = Str::lower($this->request['email']);
+            $password = Str::random(8);
+
+            $user->password = bcrypt($password);
             $user->save();
 
             DB::commit();
@@ -36,6 +37,6 @@ class UserUpdate{
             return ['success' => false, 'status' => "failed", 'message' => "Server Error: Code #{$e->getLine()}."];
         }
 
-        return ['success' => true, 'status'  => "success", 'message' => "User details has been updated."];
+        return ['success' => true, 'status'  => "success", 'message' => "User password has been reset. New password was sent to email."];
     }
 }

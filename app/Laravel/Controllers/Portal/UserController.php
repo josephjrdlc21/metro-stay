@@ -5,7 +5,7 @@ namespace App\Laravel\Controllers\Portal;
 use App\Laravel\Models\User;
 
 use App\Laravel\Actions\Portal\User\{UserList, UserCreate, UserUpdate, 
-    UserUpdateStatus};
+    UserUpdateStatus, UserUpdatePassword, UserDelete};
 
 use App\Laravel\Requests\PageRequest;
 use App\Laravel\Requests\Portal\UserRequest;
@@ -91,13 +91,6 @@ class UserController extends Controller{
     }
 
     public function update(UserRequest $request, ?int $id = null): RedirectResponse {
-        if(!User::find($id)){
-            session()->flash('notification-status', 'failed');
-            session()->flash('notification-msg', "Record not found.");
-
-            return redirect()->route('portal.users.index');
-        }
-
         $this->request['id'] = $id;
         $this->request['name'] = $request->input('name');
         $this->request['email'] = $request->input('email');
@@ -114,17 +107,40 @@ class UserController extends Controller{
         return $result['success'] ? redirect()->route('portal.users.index') : redirect()->back();
     }
 
-    public function update_status(PageRequest $request, $id=null): RedirectResponse {
-        if(!User::find($id)){
-            session()->flash('notification-status', 'failed');
-            session()->flash('notification-msg', "Record not found.");
-
-            return redirect()->route('portal.users.index');
-        }
-
+    public function update_status(PageRequest $request, ?int $id = null): RedirectResponse {
         $this->request['id'] = $id;
         
         $action = new UserUpdateStatus(
+            $this->request
+        );
+
+        $result = $action->execute();
+
+        session()->flash('notification-status', $result['status']);
+        session()->flash('notification-msg', $result['message']);
+
+        return $result['success'] ? redirect()->route('portal.users.index') : redirect()->back();
+    }
+
+    public function update_password(PageRequest $request, ?int $id = null): RedirectResponse {
+        $this->request['id'] = $id;
+        
+        $action = new UserUpdatePassword(
+            $this->request
+        );
+
+        $result = $action->execute();
+
+        session()->flash('notification-status', $result['status']);
+        session()->flash('notification-msg', $result['message']);
+
+        return $result['success'] ? redirect()->route('portal.users.index') : redirect()->back();
+    }
+
+    public function destroy(PageRequest $request, ?int $id = null): RedirectResponse {
+        $this->request['id'] = $id;
+        
+        $action = new UserDelete(
             $this->request
         );
 
