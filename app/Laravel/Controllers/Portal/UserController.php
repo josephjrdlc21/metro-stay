@@ -137,6 +137,21 @@ class UserController extends Controller{
         return $result['success'] ? redirect()->route('portal.users.index') : redirect()->back();
     }
 
+    public function show(PageRequest $request, ?int $id = null): Response|RedirectResponse {
+        $this->data['page_title'] .= " - Show User";
+
+        $this->data['user'] = User::find($id);
+
+        if(!$this->data['user']){
+            session()->flash('notification-status', 'failed');
+            session()->flash('notification-msg', "Record not found.");
+
+            return redirect()->route('portal.users.index');
+        }
+
+        return inertia('modules/users/users-show', ['values' => $this->data]);
+    }
+
     public function destroy(PageRequest $request, ?int $id = null): RedirectResponse {
         $this->request['id'] = $id;
         

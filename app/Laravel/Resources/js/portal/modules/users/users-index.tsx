@@ -228,6 +228,11 @@ export default function UsersIndex({ values }: { values: Values }){
                                                     <Portal>
                                                         <Menu.Positioner>
                                                             <Menu.Content>
+                                                                <Menu.Item cursor="pointer" value="show">
+                                                                    <Link href={route('portal.users.show', user.id)}  style={{ border: "0px", outline: "none", boxShadow: "none", textDecoration: "none", color: "inherit"}}>
+                                                                        Show Details
+                                                                    </Link>
+                                                                </Menu.Item>
                                                                 <Menu.Item cursor="pointer" value="edit">
                                                                     <Link href={route('portal.users.edit', user.id)}  style={{ border: "0px", outline: "none", boxShadow: "none", textDecoration: "none", color: "inherit"}}>
                                                                         Edit Details
