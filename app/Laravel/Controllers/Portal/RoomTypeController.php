@@ -49,4 +49,10 @@ class RoomTypeController extends Controller{
 
         return inertia('modules/room-types/room-types-index', ['values' => $this->data]);
     }
+
+    public function create(PageRequest $request): Response {
+        $this->data['page_title'] .= " - Create Room Type";
+
+        return inertia('modules/room-types/room-types-create', ['values' => $this->data]);
+    }
 }

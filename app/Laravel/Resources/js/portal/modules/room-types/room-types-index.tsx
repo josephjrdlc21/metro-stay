@@ -120,7 +120,7 @@ export default function RoomTypesIndex({ values }: { values: Values }){
                     <Flex justify="space-between" align="center" mb={3}>
                         <Heading _dark={{ color: "gray.300" }} color="gray.700" size="lg">Room Types Records</Heading>
                         <HStack>
-                            <Link href="#">
+                            <Link href={route('portal.room_types.create')}>
                                 <Button colorPalette="cyan" variant="solid" size="sm">
                                     <RiAddCircleLine /> Add Room Type
                                 </Button>
