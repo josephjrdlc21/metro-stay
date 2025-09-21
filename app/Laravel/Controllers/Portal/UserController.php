@@ -30,7 +30,7 @@ class UserController extends Controller{
     }
 
     public function index(PageRequest $request): Response {
-        $this->data['page_title'] .= " - Login";
+        $this->data['page_title'] .= " - List";
 
         $this->data['keyword'] = Str::lower($request->get('keyword'));
         $this->data['selected_status'] = $request->get('status');

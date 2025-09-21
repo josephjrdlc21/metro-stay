@@ -133,13 +133,13 @@ export default function AppSidebar(){
                             </Text>
                         </Link>
                     </Box>
-                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
+                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color={url === '/admin/room-types' ? "white" : 'gray.600'} gap={3} px={3} py={3} w="full" rounded="md" bg={url === '/admin/room-types' ? "cyan.600" : ''}
                         transition="all 0.2s ease-in-out" role="group" _hover={{
                         bg: "cyan.600",
                         cursor: "pointer",
                         color: "white",
                     }}>
-                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
+                        <Link href={route('portal.room_types.index')} style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
                             <Icon boxSize={4} as={AiOutlinePicCenter} />
                             <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
                                 Room Types
