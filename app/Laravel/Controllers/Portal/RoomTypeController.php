@@ -4,10 +4,10 @@ namespace App\Laravel\Controllers\Portal;
 
 use App\Laravel\Models\RoomType;
 
-use App\Laravel\Actions\Portal\RoomType\{RoomTypeList};
+use App\Laravel\Actions\Portal\RoomType\{RoomTypeList, RoomTypeCreate};
 
 use App\Laravel\Requests\PageRequest;
-use App\Laravel\Requests\Portal\UserRequest;
+use App\Laravel\Requests\Portal\RoomTypeRequest;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -54,5 +54,26 @@ class RoomTypeController extends Controller{
         $this->data['page_title'] .= " - Create Room Type";
 
         return inertia('modules/room-types/room-types-create', ['values' => $this->data]);
+    }
+
+    public function store(RoomTypeRequest $request): RedirectResponse {
+        $this->request['name'] = $request->input('name');
+        $this->request['bed_type'] = $request->input('bed_type');
+        $this->request['capacity'] = $request->input('capacity');
+        $this->request['price'] = $request->input('price');
+        $this->request['description'] = $request->input('description');
+        $this->request['image'] = $request->hasFile('image') ? $request->file('image') : null;
+        $this->request['amenities'] = $request->input('amenities');
+
+        $action = new RoomTypeCreate(
+            $this->request
+        );
+
+        $result = $action->execute();
+
+        session()->flash('notification-status', $result['status']);
+        session()->flash('notification-msg', $result['message']);
+
+        return $result['success'] ? redirect()->route('portal.room_types.index') : redirect()->back();
     }
 }

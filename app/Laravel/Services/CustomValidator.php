@@ -3,6 +3,7 @@
 namespace App\Laravel\Services;
 
 use App\Laravel\Models\User;
+use App\Laravel\Models\RoomType;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Validator;
@@ -119,6 +120,29 @@ class CustomValidator extends Validator {
                 break;
             default:
                 return  User::where('email', $email)
+                    ->where('id', '<>', $id)
+                    ->count() ? false : true;
+        }
+    }
+
+    public function validateUniqueName($attribute,$value,$parameters){   
+        $name = strtolower($value);
+        $id = (is_array($parameters) and isset($parameters[0])) ? $parameters[0] : "0";
+        $type = (is_array($parameters) and isset($parameters[1])) ? $parameters[1] : "user";
+
+        switch (strtolower($type)) {
+            case 'room_type':
+                return  RoomType::where('name', $name)
+                    ->where('id', '<>', $id)
+                    ->count() ? false : true;
+                break;
+            case 'bed_type':
+                return  RoomType::where('bed_type', $name)
+                    ->where('id', '<>', $id)
+                    ->count() ? false : true;
+                break;
+            default:
+                return User::where('name', $name)
                     ->where('id', '<>', $id)
                     ->count() ? false : true;
         }

@@ -155,7 +155,7 @@ export default function RoomTypesCreate({ values }: { values: Values }){
                                         </Icon>
                                         <FileUpload.DropzoneContent>
                                             <Box>Drag and drop room image here <span style={{color: "red"}}>*</span></Box>
-                                            <Box color="fg.muted">.png, .jpg up to 5MB</Box>
+                                            <Box color="fg.muted">.png, .jpg up to 2MB</Box>
                                         </FileUpload.DropzoneContent>
                                     </FileUpload.Dropzone>
                                     <FileUpload.List />

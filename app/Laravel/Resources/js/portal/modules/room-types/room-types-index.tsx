@@ -4,7 +4,7 @@ import { useRoute } from "@ziggy"
 import { Head, Link, usePage, useForm, router } from "@inertiajs/react"
 import type { PageProps as InertiaPageProps } from "@inertiajs/core"
 
-import { dateTime, formatId } from "@portal/utils/helper"
+import { dateTime, formatId, quantityFormat, priceFormat } from "@portal/utils/helper"
 
 import MainLayout from "@portal/layouts/main-layout"
 import AppNotification from "@portal/components/app-notification"
@@ -149,8 +149,8 @@ export default function RoomTypesIndex({ values }: { values: Values }){
                                                 {type.name}
                                             </Table.Cell>
                                             <Table.Cell>{type.bed_type}</Table.Cell>
-                                            <Table.Cell textAlign="center">{type.capacity}</Table.Cell>
-                                            <Table.Cell textAlign="right">₱ {type.price}</Table.Cell>
+                                            <Table.Cell textAlign="center">{quantityFormat(type.capacity)}</Table.Cell>
+                                            <Table.Cell textAlign="right">₱ {priceFormat(type.price)}</Table.Cell>
                                             <Table.Cell>{dateTime(type.created_at)}</Table.Cell>
                                             <Table.Cell textAlign="center">
                                                 <Menu.Root>

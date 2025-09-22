@@ -41,5 +41,7 @@ class RoomType extends Model{
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'amenities' => 'array',
+    ];
 }
