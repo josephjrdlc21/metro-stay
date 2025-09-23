@@ -4,7 +4,8 @@ namespace App\Laravel\Controllers\Portal;
 
 use App\Laravel\Models\RoomType;
 
-use App\Laravel\Actions\Portal\RoomType\{RoomTypeList, RoomTypeCreate};
+use App\Laravel\Actions\Portal\RoomType\{RoomTypeList, RoomTypeCreate, 
+    RoomTypeUpdate, RoomTypeDelete};
 
 use App\Laravel\Requests\PageRequest;
 use App\Laravel\Requests\Portal\RoomTypeRequest;
@@ -66,6 +67,73 @@ class RoomTypeController extends Controller{
         $this->request['amenities'] = $request->input('amenities');
 
         $action = new RoomTypeCreate(
+            $this->request
+        );
+
+        $result = $action->execute();
+
+        session()->flash('notification-status', $result['status']);
+        session()->flash('notification-msg', $result['message']);
+
+        return $result['success'] ? redirect()->route('portal.room_types.index') : redirect()->back();
+    }
+
+    public function edit(PageRequest $request, ?int $id = null): Response|RedirectResponse {
+        $this->data['page_title'] .= " - Edit Room Type";
+
+        $this->data['room_type'] = RoomType::find($id);
+
+        if(!$this->data['room_type']){
+            session()->flash('notification-status', 'failed');
+            session()->flash('notification-msg', "Record not found.");
+
+            return redirect()->route('portal.room_types.index');
+        }
+
+        return inertia('modules/room-types/room-types-edit', ['values' => $this->data]);
+    }
+
+    public function update(RoomTypeRequest $request, ?int $id = null): RedirectResponse {
+        $this->request['id'] = $id;
+        $this->request['name'] = $request->input('name');
+        $this->request['bed_type'] = $request->input('bed_type');
+        $this->request['capacity'] = $request->input('capacity');
+        $this->request['price'] = $request->input('price');
+        $this->request['description'] = $request->input('description');
+        $this->request['image'] = $request->hasFile('image') ? $request->file('image') : null;
+        $this->request['amenities'] = $request->input('amenities');
+
+        $action = new RoomTypeUpdate(
+            $this->request
+        );
+
+        $result = $action->execute();
+
+        session()->flash('notification-status', $result['status']);
+        session()->flash('notification-msg', $result['message']);
+
+        return $result['success'] ? redirect()->route('portal.room_types.index') : redirect()->back();
+    }
+
+    public function show(PageRequest $request, ?int $id = null): Response|RedirectResponse {
+        $this->data['page_title'] .= " - Show Room Type";
+
+        $this->data['room_type'] = RoomType::find($id);
+
+        if(!$this->data['room_type']){
+            session()->flash('notification-status', 'failed');
+            session()->flash('notification-msg', "Record not found.");
+
+            return redirect()->route('portal.room_types.index');
+        }
+
+        return inertia('modules/room-types/room-types-show', ['values' => $this->data]);
+    }
+
+    public function destroy(PageRequest $request, ?int $id = null): RedirectResponse {
+        $this->request['id'] = $id;
+        
+        $action = new RoomTypeDelete(
             $this->request
         );
 

@@ -4,26 +4,29 @@ import { useRoute } from "@ziggy"
 import { Head, Link, usePage, useForm, router } from "@inertiajs/react"
 import type { PageProps as InertiaPageProps } from "@inertiajs/core"
 
-import { dateTime, formatId, quantityFormat, priceFormat } from "@portal/utils/helper"
+import { statusBadgeClass, dateTime } from "@portal/utils/helper"
 
 import MainLayout from "@portal/layouts/main-layout"
 import AppNotification from "@portal/components/app-notification"
 import AppPagination from "@portal/components/app-pagination"
 import {Heading, Text, Breadcrumb, Flex, Separator,
     Card, Table, Menu, IconButton, Button, Box, HStack,
-    Grid, Portal, Field, Input} from "@chakra-ui/react"
+    Grid, Portal, Field, Input, NativeSelect, Status} from "@chakra-ui/react"
 import { LuHouse, LuEllipsisVertical } from "react-icons/lu"
 import { RiSearch2Line, RiResetRightLine, RiAddCircleLine} from "react-icons/ri"
 import Swal from "sweetalert2"
 
 interface Values {
-    page_title: string,
+    page_title: string
     keyword: string
+    statuses: { [key: string]: string }
+    selected_status: string
     start_date: string
     end_date: string
     record: {
-        data: any[],
-        links: any[],
+        data: any[]
+        links: any[]
+        room_type: any[]
     }
 }
 interface PageProps extends InertiaPageProps{
@@ -33,16 +36,18 @@ interface PageProps extends InertiaPageProps{
 
 type FormValues = {
     keyword: string
+    status: string
     start_date: string
     end_date: string
 }
 
-export default function RoomTypesIndex({ values }: { values: Values }){
+export default function RoomsIndex({ values }: { values: Values }){
     const route = useRoute();
 
     const { flash } = usePage<PageProps>().props;
     const { data, setData, processing, get } = useForm<FormValues>({
         keyword: values.keyword ?? '',
+        status: values.selected_status ?? '',
         start_date: values.start_date ?? '',
         end_date: values.end_date ?? '',
     });
@@ -50,23 +55,8 @@ export default function RoomTypesIndex({ values }: { values: Values }){
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        get(route('portal.room_types.index'));
+        get(route('portal.rooms.index'));
     };
-
-    const handleDeleteRoomType = (id: number) => {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You want to delete this room type.",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, cancel!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                router.delete(route('portal.room_types.delete', id));
-            }
-        });
-    }
 
     return(
         <MainLayout>
@@ -75,7 +65,7 @@ export default function RoomTypesIndex({ values }: { values: Values }){
             <Card.Root size="sm">
                 <Card.Body>
                     <Flex justify={{ base: "flex-start", md: "space-between" }} align="center" direction={{ base: "column", md: "row" }}>
-                        <Heading _dark={{ color: "gray.300" }} color="gray.700" size="xl">Room Types</Heading>
+                        <Heading _dark={{ color: "gray.300" }} color="gray.700" size="xl">Rooms</Heading>
                         <Breadcrumb.Root>
                             <Breadcrumb.List>
                                 <Breadcrumb.Item>
@@ -89,7 +79,7 @@ export default function RoomTypesIndex({ values }: { values: Values }){
                                 </Breadcrumb.Item>  
                                 <Breadcrumb.Separator />
                                 <Breadcrumb.Item>
-                                    <Breadcrumb.CurrentLink>Room Types</Breadcrumb.CurrentLink>
+                                    <Breadcrumb.CurrentLink>Rooms</Breadcrumb.CurrentLink>
                                 </Breadcrumb.Item>
                             </Breadcrumb.List>
                         </Breadcrumb.Root>
@@ -101,10 +91,24 @@ export default function RoomTypesIndex({ values }: { values: Values }){
                 <Card.Body>
                     {flash.message && <AppNotification status={flash.status} title={flash.message}/>}
                     <form onSubmit={handleSubmit}>
-                        <Grid templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(3, 1fr)" }} gap={3} mb={3} mt={flash.message ? 3 : 0}>
+                        <Grid templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(4, 1fr)" }} gap={3} mb={3} mt={flash.message ? 3 : 0}>
                             <Field.Root>
                                 <Field.Label>Search</Field.Label>
-                                <Input name="name" placeholder="e.g., Name, Bed Type" value={data.keyword} onChange={e => setData('keyword', e.target.value)}/>
+                                <Input name="name" placeholder="e.g., Room Number" value={data.keyword} onChange={e => setData('keyword', e.target.value)}/>
+                            </Field.Root>
+
+                            <Field.Root>
+                                <Field.Label>Status </Field.Label>
+                                <NativeSelect.Root>
+                                    <NativeSelect.Field placeholder="All" value={data.status} onChange={e => setData('status', e.target.value)}>
+                                        {Object.entries(values.statuses).map(([value, label]) => (
+                                            <option key={value} value={value}>
+                                                {label as string}
+                                            </option>
+                                        ))}
+                                    </NativeSelect.Field>
+                                    <NativeSelect.Indicator />
+                                </NativeSelect.Root>
                             </Field.Root>
 
                             <Field.Root>
@@ -122,7 +126,7 @@ export default function RoomTypesIndex({ values }: { values: Values }){
                             <Button colorPalette="cyan" variant="solid" size="sm" type="submit" loading={processing}>
                                 <RiSearch2Line /> Filter
                             </Button>
-                            <Link href={route('portal.room_types.index')} disabled={processing}>
+                            <Link href={route('portal.rooms.index')} disabled={processing}>
                                 <Button colorPalette="gray" variant="solid" size="sm" disabled={processing}>
                                     <RiResetRightLine /> Clear
                                 </Button>
@@ -133,11 +137,11 @@ export default function RoomTypesIndex({ values }: { values: Values }){
                     <Separator mt={2} mb={4}/>
 
                     <Flex justify="space-between" align="center" mb={3}>
-                        <Heading _dark={{ color: "gray.300" }} color="gray.700" size="lg">Room Types Records</Heading>
+                        <Heading _dark={{ color: "gray.300" }} color="gray.700" size="lg">Room Records</Heading>
                         <HStack>
-                            <Link href={route('portal.room_types.create')}>
+                            <Link href="#">
                                 <Button colorPalette="cyan" variant="solid" size="sm">
-                                    <RiAddCircleLine /> Add Room Type
+                                    <RiAddCircleLine /> Add Room
                                 </Button>
                             </Link>
                         </HStack>
@@ -147,26 +151,28 @@ export default function RoomTypesIndex({ values }: { values: Values }){
                         <Table.Root variant="outline">
                             <Table.Header>
                                 <Table.Row>
-                                    <Table.ColumnHeader minW="200px">Name</Table.ColumnHeader>
+                                    <Table.ColumnHeader minW="200px">Room</Table.ColumnHeader>
                                     <Table.ColumnHeader minW="200px">Type</Table.ColumnHeader>
-                                    <Table.ColumnHeader textAlign="center" minW="100px">Capacity</Table.ColumnHeader>
-                                    <Table.ColumnHeader textAlign="right" minW="100px">Price</Table.ColumnHeader>
+                                    <Table.ColumnHeader minW="200px">Status</Table.ColumnHeader>
                                     <Table.ColumnHeader minW="200px">Created At</Table.ColumnHeader>
                                     <Table.ColumnHeader textAlign="center" minW="80px">Action</Table.ColumnHeader>
                                 </Table.Row>
                             </Table.Header>
                             <Table.Body>
                                 {values?.record?.data && values?.record?.data.length > 0 ? (
-                                    (values?.record?.data.map)(type => (
-                                        <Table.Row key={type.id}>
+                                    (values?.record?.data.map)(room => (
+                                        <Table.Row key={room.id}>
                                             <Table.Cell>
-                                                <Text fontSize="sm" color="blue.500">{formatId(type.id)}</Text>
-                                                {type.name}
+                                                <Text fontSize="sm" color="blue.500">{room.room_number}</Text>
                                             </Table.Cell>
-                                            <Table.Cell>{type.bed_type}</Table.Cell>
-                                            <Table.Cell textAlign="center">{quantityFormat(type.capacity)}</Table.Cell>
-                                            <Table.Cell textAlign="right">₱ {priceFormat(type.price)}</Table.Cell>
-                                            <Table.Cell>{dateTime(type.created_at)}</Table.Cell>
+                                            <Table.Cell>{room.room_type.name}</Table.Cell>
+                                            <Table.Cell>
+                                                <Status.Root colorPalette={statusBadgeClass(room.status)}>
+                                                    <Status.Indicator />
+                                                    {room.status}
+                                                </Status.Root>
+                                            </Table.Cell>
+                                            <Table.Cell>{dateTime(room.created_at)}</Table.Cell>
                                             <Table.Cell textAlign="center">
                                                 <Menu.Root>
                                                     <Menu.Trigger asChild _focus={{ boxShadow: "none", outline: "none" }} _active={{ bg: "transparent" }}>
@@ -177,20 +183,13 @@ export default function RoomTypesIndex({ values }: { values: Values }){
                                                     <Portal>
                                                         <Menu.Positioner>
                                                             <Menu.Content>
-                                                                <Menu.Item cursor="pointer" value="show">
-                                                                    <Link href={route('portal.room_types.show', type.id)}  style={{ border: "0px", outline: "none", boxShadow: "none", textDecoration: "none", color: "inherit"}}>
-                                                                        Show Details
-                                                                    </Link>
-                                                                </Menu.Item>
                                                                 <Menu.Item cursor="pointer" value="edit">
-                                                                    <Link href={route('portal.room_types.edit', type.id)}  style={{ border: "0px", outline: "none", boxShadow: "none", textDecoration: "none", color: "inherit"}}>
+                                                                    <Link href="#" style={{ border: "0px", outline: "none", boxShadow: "none", textDecoration: "none", color: "inherit"}}>
                                                                         Edit Details
                                                                     </Link>
                                                                 </Menu.Item>
-                                                                <Menu.Item cursor="pointer" value="delete" onClick={() => {
-                                                                    setTimeout(() => handleDeleteRoomType(type.id), 0);
-                                                                }}>
-                                                                    Delete Room Type
+                                                                <Menu.Item cursor="pointer" value="delete">
+                                                                    Delete Room
                                                                 </Menu.Item>
                                                             </Menu.Content>
                                                         </Menu.Positioner>

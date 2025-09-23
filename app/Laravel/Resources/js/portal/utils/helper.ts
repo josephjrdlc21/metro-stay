@@ -12,6 +12,16 @@ export function statusBadgeClass(status: string): string {
             return "green";
         case "inactive":
             return "red";
+        case "available":
+            return "green";
+        case "occupied":
+            return "orange";
+        case "reserved":
+            return "blue";
+        case "cleaning":
+            return "red";
+        case "maintenance":
+            return "red";
         default:
             return "gray";
     }

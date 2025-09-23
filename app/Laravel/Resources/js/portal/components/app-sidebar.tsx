@@ -1,3 +1,4 @@
+import { ElementType } from "react"
 import { useRoute } from "@ziggy"
 import { Link, usePage } from "@inertiajs/react"
 import { useSidebar } from "@portal/context/sidebar-context"
@@ -8,11 +9,86 @@ import {AiOutlineBarChart, AiOutlineBlock, AiOutlineCalendar, AiOutlineCreditCar
     AiOutlineDesktop, AiOutlineFieldTime, AiOutlineFileDone, AiOutlinePicCenter,
     AiOutlineTeam, AiOutlineUser, AiOutlineUserSwitch, AiOutlineWallet} from "react-icons/ai"
 
+type Navigation = {
+    label: string;
+    icon: ElementType;
+    href: string;
+};
+
 export default function AppSidebar(){
     const route = useRoute();
 
     const { isOpen, sidebarRef } = useSidebar();
     const { url } = usePage();
+
+    const navigationItems: Navigation[] = [
+        {
+            label: "Users",
+            icon: AiOutlineUser,
+            href: route("portal.users.index"),
+        },
+        {
+            label: "Bookings",
+            icon: AiOutlineCalendar,
+            href: "#",
+        },
+        {
+            label: "Customers",
+            icon: AiOutlineTeam,
+            href: "#",
+        },
+        {
+            label: "Rooms",
+            icon: AiOutlineWallet,
+            href: route("portal.rooms.index"),
+        },
+        {
+            label: "Room Types",
+            icon: AiOutlinePicCenter,
+            href: route("portal.room_types.index"),
+        },
+        {
+            label: "House Keeping",
+            icon: AiOutlineBlock,
+            href: "#",
+        },
+        {
+            label: "Payments",
+            icon: AiOutlineCreditCard,
+            href: "#",
+        },
+        {
+            label: "Sales Reports",
+            icon: AiOutlineBarChart,
+            href: "#",
+        },
+        {
+            label: "Activity Logs",
+            icon: AiOutlineFieldTime,
+            href: "#",
+        },
+    ];
+
+    const handytoolItems: Navigation[] = [
+        {
+            label: "Dashboard",
+            icon: AiOutlineDesktop,
+            href: route("portal.index"),
+        },
+    ]
+
+    const contentControlItems: Navigation[] = [
+        {
+            label: "Roles",
+            icon: AiOutlineUserSwitch,
+            href: "#",
+        },
+        {
+            label: "Permissions",
+            icon: AiOutlineFileDone,
+            href: "#",
+        },
+    ]
 
     return(
         <Box
@@ -59,19 +135,50 @@ export default function AppSidebar(){
                     Handy Tool
                 </Text>
                 <VStack align="start" w="full" mt={2}>
-                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color={url === '/admin' ? "white" : 'gray.600'} gap={3} px={3} py={3} w="full" rounded="md" bg={url === '/admin' ? "cyan.600" : ''}
-                        transition="all 0.2s ease-in-out" role="group" _hover={{
-                        bg: "cyan.600",
-                        cursor: "pointer",
-                        color: "white",
-                    }}>
-                        <Link href={route('portal.index')} style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
-                            <Icon boxSize={4} as={AiOutlineDesktop} />
-                            <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
-                                Dashboard
-                            </Text>
-                        </Link>
-                    </Box>
+                    {handytoolItems.map((item) => (
+                        <Box
+                            key={item.label}
+                            display="flex"
+                            alignItems="center"
+                            gap={3}
+                            px={3}
+                            py={3}
+                            w="full"
+                            rounded="md"
+                            _dark={{ color: "gray.300" }}
+                            color={url === item.href ? "white" : "gray.600"}
+                            bg={url === item.href ? "cyan.600" : ""}
+                            transition="all 0.2s ease-in-out"
+                            role="group"
+                            _hover={{
+                                bg: "cyan.600",
+                                cursor: "pointer",
+                                color: "white",
+                            }}
+                        >
+                            <Link
+                                href={item.href}
+                                style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "12px",
+                                width: "100%",
+                                }}
+                            >
+                                <Icon boxSize={4} as={item.icon} />
+                                <Text
+                                    fontSize="sm"
+                                    fontWeight="normal"
+                                    display={{
+                                        base: isOpen ? "block" : "none",
+                                        lg: isOpen ? "none" : "block",
+                                    }}
+                                >
+                                    {item.label}
+                                </Text>
+                            </Link>
+                        </Box>
+                    ))}
                 </VStack>
 
                 <Stack w="full">
@@ -81,110 +188,50 @@ export default function AppSidebar(){
                     </Text>
                 </Stack>
                 <VStack align="start" w="full" mt={2}>
-                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color={url === '/admin/users' ? "white" : 'gray.600'} gap={3} px={3} py={3} w="full" rounded="md" bg={url === '/admin/users' ? "cyan.600" : ''}
-                        transition="all 0.2s ease-in-out" role="group" _hover={{
-                        bg: "cyan.600",
-                        cursor: "pointer",
-                        color: "white",
-                    }}>
-                        <Link href={route('portal.users.index')} style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
-                            <Icon boxSize={4} as={AiOutlineUser} />
-                            <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
-                                Users
-                            </Text>
-                        </Link>
-                    </Box>
-                    <Box display="flex" alignItems="center" gap={3} px={3} py={3} w="full" rounded="md" _dark={{ color: "gray.300" }} color="gray.600"
-                        transition="all 0.2s ease-in-out" role="group" _hover={{
-                        bg: "cyan.600",
-                        cursor: "pointer",
-                        color: "white",
-                    }}>
-                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
-                            <Icon boxSize={4} as={AiOutlineCalendar} />
-                            <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
-                                Bookings
-                            </Text>
-                        </Link>
-                    </Box>
-                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
-                        transition="all 0.2s ease-in-out" role="group" _hover={{
-                        bg: "cyan.600",
-                        cursor: "pointer",
-                        color: "white",
-                    }}>
-                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
-                            <Icon boxSize={4} as={AiOutlineTeam} />
-                            <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
-                                Customers
-                            </Text>
-                        </Link>
-                    </Box>
-                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
-                        transition="all 0.2s ease-in-out" role="group" _hover={{
-                        bg: "cyan.600",
-                        cursor: "pointer",
-                        color: "white",
-                    }}>
-                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
-                            <Icon boxSize={4} as={AiOutlineWallet} />
-                            <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
-                                Rooms
-                            </Text>
-                        </Link>
-                    </Box>
-                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color={url === '/admin/room-types' ? "white" : 'gray.600'} gap={3} px={3} py={3} w="full" rounded="md" bg={url === '/admin/room-types' ? "cyan.600" : ''}
-                        transition="all 0.2s ease-in-out" role="group" _hover={{
-                        bg: "cyan.600",
-                        cursor: "pointer",
-                        color: "white",
-                    }}>
-                        <Link href={route('portal.room_types.index')} style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
-                            <Icon boxSize={4} as={AiOutlinePicCenter} />
-                            <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
-                                Room Types
-                            </Text>
-                        </Link>
-                    </Box>
-                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
-                        transition="all 0.2s ease-in-out" role="group" _hover={{
-                        bg: "cyan.600",
-                        cursor: "pointer",
-                        color: "white",
-                    }}>
-                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
-                            <Icon boxSize={4} as={AiOutlineBlock} />
-                            <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
-                                House Keeping
-                            </Text>
-                        </Link>
-                    </Box>
-                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
-                        transition="all 0.2s ease-in-out" role="group" _hover={{
-                        bg: "cyan.600",
-                        cursor: "pointer",
-                        color: "white",
-                    }}>
-                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
-                            <Icon boxSize={4} as={AiOutlineCreditCard} />
-                            <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
-                                Payments
-                            </Text>
-                        </Link>
-                    </Box>
-                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
-                        transition="all 0.2s ease-in-out" role="group" _hover={{
-                        bg: "cyan.600",
-                        cursor: "pointer",
-                        color: "white",
-                    }}>
-                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
-                            <Icon boxSize={4} as={AiOutlineBarChart} />
-                            <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
-                                Sales Reports
-                            </Text>
-                        </Link>
-                    </Box>
+                    {navigationItems.map((item) => (
+                        <Box
+                            key={item.label}
+                            display="flex"
+                            alignItems="center"
+                            gap={3}
+                            px={3}
+                            py={3}
+                            w="full"
+                            rounded="md"
+                            _dark={{ color: "gray.300" }}
+                            color={url === item.href ? "white" : "gray.600"}
+                            bg={url === item.href ? "cyan.600" : ""}
+                            transition="all 0.2s ease-in-out"
+                            role="group"
+                            _hover={{
+                                bg: "cyan.600",
+                                cursor: "pointer",
+                                color: "white",
+                            }}
+                        >
+                            <Link
+                                href={item.href}
+                                style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "12px",
+                                width: "100%",
+                                }}
+                            >
+                                <Icon boxSize={4} as={item.icon} />
+                                <Text
+                                    fontSize="sm"
+                                    fontWeight="normal"
+                                    display={{
+                                        base: isOpen ? "block" : "none",
+                                        lg: isOpen ? "none" : "block",
+                                    }}
+                                >
+                                    {item.label}
+                                </Text>
+                            </Link>
+                        </Box>
+                    ))}
                 </VStack>
 
                 <Stack w="full">
@@ -194,54 +241,50 @@ export default function AppSidebar(){
                     </Text>
                 </Stack>
                 <VStack align="start" w="full" mt={2}>
-                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
-                        transition="all 0.2s ease-in-out" role="group" _hover={{
-                        bg: "cyan.600",
-                        cursor: "pointer",
-                        color: "white",
-                    }}>
-                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
-                            <Icon boxSize={4} as={AiOutlineUserSwitch} />
-                            <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
-                                Roles
-                            </Text>
-                        </Link>
-                    </Box>
-                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
-                        transition="all 0.2s ease-in-out" role="group" _hover={{
-                        bg: "cyan.600",
-                        cursor: "pointer",
-                        color: "white",
-                    }}>
-                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
-                            <Icon boxSize={4} as={AiOutlineFileDone} />
-                            <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
-                                Permissions
-                            </Text>
-                        </Link>
-                    </Box>
-                </VStack>
-
-                <Stack w="full">
-                    <Separator mt={2} mb={4}/>
-                    <Text fontSize="sm" fontWeight="semibold" _dark={{ color: "gray.200" }} color="gray.700" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
-                        Setting
-                    </Text>
-                </Stack>
-                <VStack align="start" w="full" mt={2}>
-                    <Box display="flex" alignItems="center" _dark={{ color: "gray.300" }} color="gray.600" gap={3} px={3} py={3} w="full" rounded="md"
-                        transition="all 0.2s ease-in-out" role="group" _hover={{
-                        bg: "cyan.600",
-                        cursor: "pointer",
-                        color: "white",
-                    }}>
-                        <Link href="#" style={{display: "flex", alignItems: "center", gap: "12px", width: "100%"}}>
-                            <Icon boxSize={4} as={AiOutlineFieldTime} />
-                            <Text fontSize="sm" fontWeight="normal" display={{ base: isOpen ? "block" : "none", lg: isOpen ? "none" : "block"}}>
-                                Activity Logs
-                            </Text>
-                        </Link>
-                    </Box>
+                    {contentControlItems.map((item) => (
+                        <Box
+                            key={item.label}
+                            display="flex"
+                            alignItems="center"
+                            gap={3}
+                            px={3}
+                            py={3}
+                            w="full"
+                            rounded="md"
+                            _dark={{ color: "gray.300" }}
+                            color={url === item.href ? "white" : "gray.600"}
+                            bg={url === item.href ? "cyan.600" : ""}
+                            transition="all 0.2s ease-in-out"
+                            role="group"
+                            _hover={{
+                                bg: "cyan.600",
+                                cursor: "pointer",
+                                color: "white",
+                            }}
+                        >
+                            <Link
+                                href={item.href}
+                                style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "12px",
+                                width: "100%",
+                                }}
+                            >
+                                <Icon boxSize={4} as={item.icon} />
+                                <Text
+                                    fontSize="sm"
+                                    fontWeight="normal"
+                                    display={{
+                                        base: isOpen ? "block" : "none",
+                                        lg: isOpen ? "none" : "block",
+                                    }}
+                                >
+                                    {item.label}
+                                </Text>
+                            </Link>
+                        </Box>
+                    ))}
                 </VStack>
             </VStack>
         </Box>

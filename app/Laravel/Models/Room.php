@@ -42,4 +42,8 @@ class Room extends Model{
      * @var array
      */
     protected $casts = [];
+
+    public function room_type() {
+        return $this->belongsTo('App\Laravel\Models\RoomType', 'room_type_id', 'id');
+    }
 }
