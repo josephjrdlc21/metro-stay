@@ -36,7 +36,7 @@ export default function RoomTypesShow({ values }: { values: Values }){
             <Card.Root size="sm">
                 <Card.Body>
                     <Flex justify={{ base: "flex-start", md: "space-between" }} align="center" direction={{ base: "column", md: "row" }}>
-                        <Heading _dark={{ color: "gray.300" }} color="gray.700" size="xl">Users</Heading>
+                        <Heading _dark={{ color: "gray.300" }} color="gray.700" size="xl">Room Types</Heading>
                         <Breadcrumb.Root>
                             <Breadcrumb.List>
                                 <Breadcrumb.Item>

@@ -4,6 +4,7 @@ namespace App\Laravel\Services;
 
 use App\Laravel\Models\User;
 use App\Laravel\Models\RoomType;
+use App\Laravel\Models\Room;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Validator;
@@ -132,17 +133,22 @@ class CustomValidator extends Validator {
 
         switch (strtolower($type)) {
             case 'room_type':
-                return  RoomType::where('name', $name)
+                return  RoomType::whereRaw('LOWER(name) = ?', [$name])
+                    ->where('id', '<>', $id)
+                    ->count() ? false : true;
+                break;
+            case 'room_number':
+                return  Room::where('room_number', $name)
                     ->where('id', '<>', $id)
                     ->count() ? false : true;
                 break;
             case 'bed_type':
-                return  RoomType::where('bed_type', $name)
+                return  RoomType::whereRaw('LOWER(bed_type) = ?', [$name])
                     ->where('id', '<>', $id)
                     ->count() ? false : true;
                 break;
             default:
-                return User::where('name', $name)
+                return User::whereRaw('LOWER(name) = ?', [$name])
                     ->where('id', '<>', $id)
                     ->count() ? false : true;
         }

@@ -58,6 +58,21 @@ export default function RoomsIndex({ values }: { values: Values }){
         get(route('portal.rooms.index'));
     };
 
+    const handleDeleteRoom = (id: number) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to delete this room.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                router.delete(route('portal.rooms.delete', id));
+            }
+        });
+    }
+
     return(
         <MainLayout>
             <Head title={values.page_title}/>
@@ -139,7 +154,7 @@ export default function RoomsIndex({ values }: { values: Values }){
                     <Flex justify="space-between" align="center" mb={3}>
                         <Heading _dark={{ color: "gray.300" }} color="gray.700" size="lg">Room Records</Heading>
                         <HStack>
-                            <Link href="#">
+                            <Link href={route('portal.rooms.create')}>
                                 <Button colorPalette="cyan" variant="solid" size="sm">
                                     <RiAddCircleLine /> Add Room
                                 </Button>
@@ -184,11 +199,13 @@ export default function RoomsIndex({ values }: { values: Values }){
                                                         <Menu.Positioner>
                                                             <Menu.Content>
                                                                 <Menu.Item cursor="pointer" value="edit">
-                                                                    <Link href="#" style={{ border: "0px", outline: "none", boxShadow: "none", textDecoration: "none", color: "inherit"}}>
+                                                                    <Link href={route('portal.rooms.edit', room.id)} style={{ border: "0px", outline: "none", boxShadow: "none", textDecoration: "none", color: "inherit"}}>
                                                                         Edit Details
                                                                     </Link>
                                                                 </Menu.Item>
-                                                                <Menu.Item cursor="pointer" value="delete">
+                                                                <Menu.Item cursor="pointer" value="delete" onClick={() => {
+                                                                    setTimeout(() => handleDeleteRoom(room.id), 0);
+                                                                }}>
                                                                     Delete Room
                                                                 </Menu.Item>
                                                             </Menu.Content>

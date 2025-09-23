@@ -184,7 +184,7 @@ export default function RoomTypesEdit({ values }: { values: Values }){
                                 </Button>
                             </Link>
                             <Button type="submit" variant="solid" colorPalette="cyan" size="sm" loading={processing}>
-                                <FaRegPaperPlane/>  Submit
+                                <FaRegPaperPlane/>  Save
                             </Button>
                         </Card.Footer>
                     </Card.Root>

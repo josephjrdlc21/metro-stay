@@ -19,9 +19,14 @@ class RoomTypeUpdate{
     }
 
     public function execute(): array {
+        $room_type = RoomType::find($this->request['id']);
+
+        if(!$room_type){
+            return ['success' => false, 'status' => "failed", 'message' => "Record not found."];
+        }
+
         DB::beginTransaction();
         try {
-            $room_type = RoomType::find($this->request['id']);
             $room_type->name = Str::title($this->request['name']);
             $room_type->bed_type = Str::title($this->request['bed_type']);
             $room_type->capacity = $this->request['capacity'];

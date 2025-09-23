@@ -4,10 +4,10 @@ namespace App\Laravel\Controllers\Portal;
 
 use App\Laravel\Models\{Room, RoomType};
 
-use App\Laravel\Actions\Portal\Room\{RoomList};
+use App\Laravel\Actions\Portal\Room\{RoomList, RoomCreate, RoomUpdate, RoomDelete};
 
 use App\Laravel\Requests\PageRequest;
-//use App\Laravel\Requests\Portal\RoomRequest;
+use App\Laravel\Requests\Portal\RoomRequest;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -51,5 +51,76 @@ class RoomController extends Controller{
         $this->data['record'] = $result['record'];
 
         return inertia('modules/rooms/rooms-index', ['values' => $this->data]);
+    }
+
+    public function create(PageRequest $request): Response {
+        $this->data['page_title'] .= " - Create Room";
+
+        return inertia('modules/rooms/rooms-create', ['values' => $this->data]);
+    }
+
+    public function store(RoomRequest $request): RedirectResponse {
+        $this->request['room_number'] = $request->input('room_number');
+        $this->request['bed_type'] = $request->input('bed_type');
+        $this->request['status'] = $request->input('status');
+
+        $action = new RoomCreate(
+            $this->request
+        );
+
+        $result = $action->execute();
+
+        session()->flash('notification-status', $result['status']);
+        session()->flash('notification-msg', $result['message']);
+
+        return $result['success'] ? redirect()->route('portal.rooms.index') : redirect()->back();
+    }
+
+    public function edit(PageRequest $request, ?int $id = null): Response|RedirectResponse {
+        $this->data['page_title'] .= " - Edit Room";
+
+        $this->data['room'] = Room::find($id);
+
+        if(!$this->data['room']){
+            session()->flash('notification-status', 'failed');
+            session()->flash('notification-msg', "Record not found.");
+
+            return redirect()->route('portal.rooms.index');
+        }
+
+        return inertia('modules/rooms/rooms-edit', ['values' => $this->data]);
+    }
+
+    public function update(RoomRequest $request, ?int $id = null): RedirectResponse {
+        $this->request['id'] = $id;
+        $this->request['room_number'] = $request->input('room_number');
+        $this->request['bed_type'] = $request->input('bed_type');
+        $this->request['status'] = $request->input('status');
+
+        $action = new RoomUpdate(
+            $this->request
+        );
+
+        $result = $action->execute();
+
+        session()->flash('notification-status', $result['status']);
+        session()->flash('notification-msg', $result['message']);
+
+        return $result['success'] ? redirect()->route('portal.rooms.index') : redirect()->back();
+    }
+
+    public function destroy(PageRequest $request, ?int $id = null): RedirectResponse {
+        $this->request['id'] = $id;
+
+        $action = new RoomDelete(
+            $this->request
+        );
+
+        $result = $action->execute();
+
+        session()->flash('notification-status', $result['status']);
+        session()->flash('notification-msg', $result['message']);
+
+        return $result['success'] ? redirect()->route('portal.rooms.index') : redirect()->back();
     }
 }
