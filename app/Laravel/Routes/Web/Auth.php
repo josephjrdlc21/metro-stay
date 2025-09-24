@@ -1,0 +1,10 @@
+<?php
+
+Route::group(['as' => "auth."], function() {
+    Route::group(['middleware' => "web.guest"], function(){
+        Route::get('/login',  ['as' => "login", 'uses' => "AuthenticateController@login"]);
+        Route::post('/login',  ['uses' => "AuthenticateController@authenticate"]);
+    });
+
+    Route::get('/logout', ['as' => "logout", 'uses' => "AuthenticateController@logout"]);
+});

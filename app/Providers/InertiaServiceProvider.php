@@ -26,6 +26,7 @@ class InertiaServiceProvider extends ServiceProvider
             'auth' => function () {
                 return [
                     'web' => auth('web')->user(),
+                    'portal' => auth('portal')->user(),
                 ];
             },
             'flash' => function () {
