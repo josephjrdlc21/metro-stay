@@ -5,6 +5,7 @@ namespace App\Laravel\Services;
 use App\Laravel\Models\User;
 use App\Laravel\Models\RoomType;
 use App\Laravel\Models\Room;
+use App\Laravel\Models\Customer;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Validator;
@@ -12,16 +13,6 @@ use Propaganistas\LaravelPhone\PhoneNumber;
 use Carbon\Carbon;
 
 class CustomValidator extends Validator {
-
-    /**
-     * rule name: current_password
-     *
-     */
-    public function validateCurrentPassword($attribute, $value, $parameters){
-        $user = auth('web')->user();
-        return Hash::check($value,$user->password) ? TRUE : FALSE;
-    }
-
     /**
      * rule name: password_format
      *
@@ -60,12 +51,7 @@ class CustomValidator extends Validator {
 
         switch (strtolower($type)) {
             case 'customer':
-                return  Customer::where('mobile_number', $contact_number)
-                    ->where('id', '<>', $id)
-                    ->count() ? false : true;
-                break;
-            case 'merchant':
-                return  Merchant::where('mobile_number', $contact_number)
+                return Customer::where('phone_number', $contact_number)
                     ->where('id', '<>', $id)
                     ->count() ? false : true;
                 break;
@@ -114,13 +100,8 @@ class CustomValidator extends Validator {
                     ->where('id', '<>', $id)
                     ->count() ? false : true;
                 break;
-            case 'merchant':
-                return  Merchant::where('email', $email)
-                    ->where('id', '<>', $id)
-                    ->count() ? false : true;
-                break;
             default:
-                return  User::where('email', $email)
+                return User::where('email', $email)
                     ->where('id', '<>', $id)
                     ->count() ? false : true;
         }

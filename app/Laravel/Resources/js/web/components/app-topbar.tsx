@@ -1,29 +1,35 @@
-import { ReactNode } from 'react'
 import { useRoute } from "@ziggy"
 
 import { ColorModeButton } from "@/components/ui/color-mode"
-import {Box, Flex, Avatar, HStack, Text, IconButton, Button, Menu,  
-    Link, useDisclosure, Stack, Portal, Icon} from '@chakra-ui/react'
+import {Box, Flex, HStack, Text, IconButton, Menu, Portal, Avatar, 
+    Link, useDisclosure, Stack, Icon, Container} from '@chakra-ui/react'
 import { FaEnvelopeOpen } from 'react-icons/fa'
-import {AiOutlineMenu, AiOutlineLock, AiOutlineLogout, AiOutlineUserSwitch} from "react-icons/ai"
+import { AiOutlineMenu, AiOutlineUserSwitch, AiOutlineLock, AiOutlineLogout } from "react-icons/ai"
 
-interface Props {
-    children: ReactNode
-}
+type NavLinkProps = {
+    href: string;
+    children: React.ReactNode;
+};
 
-const Links = ['Dashboard', 'Hotels', 'Bookings', 'Payments']
+const Links = [
+    { name: 'Dashboard', href: '#' },
+    { name: 'Hotels', href: '#' },
+    { name: 'Bookings', href: '#' },
+    { name: 'Payments', href: '#' },
+];
 
-const NavLink = (props: Props) => {
-    const { children } = props
-        return (
+const NavLink = ({ href, children }: NavLinkProps) => {
+
+    return (
         <Link
+            href={href}
             px={2}
             py={1}
             rounded={'md'}
         >
             {children}
         </Link>
-    )
+  );
 }
 
 export default function WithAction() {
@@ -32,8 +38,17 @@ export default function WithAction() {
     const { open, onOpen, onClose } = useDisclosure()
 
     return (
-        <>
-            <Box px={4}>
+        <Box px={4}
+            position="fixed"
+            top="0"
+            left="0"
+            right="0"
+            zIndex={1000}
+            boxShadow="sm"
+            bg="white"
+            _dark={{ bg: "gray.800" }}
+        >
+            <Container>
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
                     <IconButton size={'xs'} bg="cyan.100" color="cyan.700"
                         aria-label={'Open Menu'}
@@ -52,7 +67,9 @@ export default function WithAction() {
                     <HStack alignItems={'center'}>
                         <HStack as={'nav'} display={{ base: 'none', md: 'flex' }}>
                             {Links.map((link) => (
-                                <NavLink key={link}>{link}</NavLink>
+                                <NavLink key={link.name} href={link.href}>
+                                    {link.name}
+                                </NavLink>
                             ))}
                         </HStack>
                     </HStack>
@@ -105,13 +122,15 @@ export default function WithAction() {
                 {open ? (
                 <Box pb={4} display={{ md: 'none' }}>
                     <Stack as={'nav'}>
-                    {Links.map((link) => (
-                        <NavLink key={link}>{link}</NavLink>
-                    ))}
+                        {Links.map((link) => (
+                            <NavLink key={link.name} href={link.href}>
+                                {link.name}
+                            </NavLink>
+                        ))}
                     </Stack>
                 </Box>
                 ) : null}
-            </Box>
-        </>
+            </Container>
+        </Box>
     )
 }

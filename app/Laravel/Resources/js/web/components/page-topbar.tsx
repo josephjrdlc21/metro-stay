@@ -1,4 +1,3 @@
-import { ReactNode } from 'react'
 import { useRoute } from "@ziggy"
 
 import { ColorModeButton } from "@/components/ui/color-mode"
@@ -76,9 +75,11 @@ export default function WithAction() {
                     </HStack>
                     <Flex alignItems={'center'}>
                         <ColorModeButton mx={3}/>
-                        <Button rounded={'full'}>
-                            <Link href={route('web.auth.login')} color="gray.200" _dark={{ color: "gray.800" }}>Login</Link>
-                        </Button>
+                        <Link href={route('web.auth.login')} color="gray.200" _dark={{ color: "gray.800" }}>
+                            <Button rounded={'full'}>
+                                Login
+                            </Button>
+                        </Link>
                     </Flex>
                 </Flex>
 
