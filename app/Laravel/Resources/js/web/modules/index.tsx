@@ -1,10 +1,15 @@
-import MainLayout from "@web/layouts/main-layout"
-import { Button, HStack } from "@chakra-ui/react"
+import { Head } from "@inertiajs/react"
 
-export default function Index({ values }: { values: any }){
+import MainLayout from "@web/layouts/main-layout"
+interface Values {
+    page_title: string,
+}
+
+export default function Index({ values }: { values: Values }){
 
     return (
         <MainLayout>
+            <Head title={values.page_title}/>
             
         </MainLayout>
     )

@@ -33,6 +33,12 @@ class AuthenticateLogin{
         if (auth($this->guard)->attempt(['email' => Str::lower($this->email), 'password' => $this->password])) {
             $account = auth($this->guard)->user();
 
+            if (Str::lower($account->status) !== "active") {
+                auth($this->guard)->logout();
+
+                return ['success' => false, 'status'  => "warning", 'message' => "Account locked. Access to system was removed."];
+            }
+
             return ['success' => true, 'status'  => "success", 'message' => "Welcome {$account->name}!"];
         }
 

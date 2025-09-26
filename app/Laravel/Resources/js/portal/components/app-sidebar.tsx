@@ -35,7 +35,7 @@ export default function AppSidebar(){
         {
             label: "Customers",
             icon: AiOutlineTeam,
-            href: "#",
+            href: route("portal.customers.index"),
         },
         {
             label: "Rooms",

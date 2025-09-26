@@ -1,4 +1,4 @@
-import { useRoute } from "@ziggy"
+import { route, useRoute } from "@ziggy"
 
 import { ColorModeButton } from "@/components/ui/color-mode"
 import {Box, Flex, HStack, Text, IconButton, Menu, Portal, Avatar, 
@@ -12,8 +12,8 @@ type NavLinkProps = {
 };
 
 const Links = [
-    { name: 'Dashboard', href: '#' },
-    { name: 'Hotels', href: '#' },
+    { name: 'Dashboard', href: route('web.index') },
+    { name: 'Hotels', href: route('web.hotels.index') },
     { name: 'Bookings', href: '#' },
     { name: 'Payments', href: '#' },
 ];

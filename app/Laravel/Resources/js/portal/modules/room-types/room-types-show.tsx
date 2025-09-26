@@ -2,7 +2,7 @@ import { useRoute } from "@ziggy"
 
 import { Head, Link } from "@inertiajs/react"
 
-import { statusBadgeClass, dateTime, formatId, priceFormat, quantityFormat } from "@portal/utils/helper"
+import { priceFormat, quantityFormat } from "@portal/utils/helper"
 
 import MainLayout from "@portal/layouts/main-layout"
 import {Box, Button, Card, Text, Heading, Separator, Image, Stack, RatingGroup,
@@ -65,7 +65,7 @@ export default function RoomTypesShow({ values }: { values: Values }){
             <Container maxW="4xl" mt={4} style={{padding: "0px"}}>
                 <Card.Root size="sm">
                     <Card.Header pb={2}>
-                        <Heading _dark={{ color: "gray.300" }} color="gray.700" size="md">Show user details</Heading>
+                        <Heading _dark={{ color: "gray.300" }} color="gray.700" size="md">Show room type details</Heading>
                     </Card.Header>
                     <Separator mt={2} mb={2} />
                     <Card.Body>

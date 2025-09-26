@@ -1,6 +1,7 @@
 import { PropsWithChildren } from "react"
 
 import AppTopbar from "@web/components/app-topbar"
+import AppFooter from "@web/components/app-footer";
 import { Box, Container } from '@chakra-ui/react'
 
 export default function MainLayout({ children }: PropsWithChildren){
@@ -12,10 +13,13 @@ export default function MainLayout({ children }: PropsWithChildren){
             overflowX="hidden"
             _dark={{ bg: "gray.900" }} 
         >
-            <Container maxWidth="8xl">
-                <AppTopbar/>
+            <AppTopbar/>
+
+            <Container maxWidth="8xl" mt={20}>
                 <Box p={4}>{children}</Box>
             </Container>
+            
+            <AppFooter/>
         </Box>
     );
 }

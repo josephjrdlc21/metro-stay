@@ -8,7 +8,7 @@ interface Values {
     page_title: string,
 }
 
-export default function Index({ values }: { values: Values }){
+export default function Home({ values }: { values: Values }){
 
     return (
         <PageLayout>

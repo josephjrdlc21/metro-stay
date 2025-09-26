@@ -8,6 +8,8 @@ Route::group(['as' => "web.", 'namespace' => $namespace, 'middleware' => ["web"]
     include_once app_path('Laravel/Routes/Web/Auth.php');
 
     Route::group(['middleware' => "web.auth"], function(){
-        Route::get('/',  ['as' => "index", 'uses' => "MainController@index"]);
+        Route::get('/dashboard',  ['as' => "index", 'uses' => "MainController@index"]);
+
+        include_once app_path('Laravel/Routes/Web/Hotel.php');
     });
 });
