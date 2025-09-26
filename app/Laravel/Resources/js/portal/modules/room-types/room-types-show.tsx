@@ -5,8 +5,8 @@ import { Head, Link } from "@inertiajs/react"
 import { priceFormat, quantityFormat } from "@portal/utils/helper"
 
 import MainLayout from "@portal/layouts/main-layout"
-import {Box, Button, Card, Text, Heading, Separator, Image, Stack, RatingGroup,
-    Breadcrumb, Flex, SimpleGrid, Container, Status, Badge } from "@chakra-ui/react"
+import { Button, Card, Text, Heading, Separator, Image, Stack, RatingGroup,
+    Breadcrumb, Flex, Container, Badge } from "@chakra-ui/react"
 import { LuHouse, LuArrowLeftFromLine } from "react-icons/lu"
 
 interface Values {

@@ -43,4 +43,19 @@ class HotelController extends Controller{
 
         return inertia('modules/hotels/hotels-index', ['values' => $this->data]);
     }
+
+    public function show(PageRequest $request, ?int $id = null): Response|RedirectResponse {
+        $this->data['page_title'] .= " - Show Hotel Type";
+
+        $this->data['room_type'] = RoomType::find($id);
+
+        if(!$this->data['room_type']){
+            session()->flash('notification-status', 'failed');
+            session()->flash('notification-msg', "Record not found.");
+
+            return redirect()->route('web.hotels.index');
+        }
+
+        return inertia('modules/hotels/hotels-show', ['values' => $this->data]);
+    }
 }

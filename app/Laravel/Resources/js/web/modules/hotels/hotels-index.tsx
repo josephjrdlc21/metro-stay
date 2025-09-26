@@ -76,7 +76,7 @@ export default function HotelsIndex({ values }: { values: Values }){
                 (values?.record?.data.map)(type => (
                     <Box mt={10} key={type.id}>
                         <Flex gap="3" direction={{ base: "column", lg: "row"}}>
-                            <Link href="#" width="full">
+                            <Link href={route('web.hotels.show', type.id)} width="full">
                                 <Image
                                     rounded="md"
                                     shadow="lg"
@@ -87,7 +87,7 @@ export default function HotelsIndex({ values }: { values: Values }){
                             </Link>
                             <Box spaceY={2}>
                                 <Text color="gray.500" textStyle="sm" fontWeight="medium">{type.name}</Text>
-                                <Link href="#">
+                                <Link href={route('web.hotels.show', type.id)}>
                                     <Text textStyle="xl">{type.bed_type}</Text>
                                 </Link>
                                 <Flex gap={2} align="center">

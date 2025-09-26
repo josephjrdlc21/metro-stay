@@ -16,7 +16,7 @@ export default function MainLayout({ children }: PropsWithChildren){
             <AppTopbar/>
 
             <Container maxWidth="8xl" mt={20}>
-                <Box p={4}>{children}</Box>
+                <Box py={4}>{children}</Box>
             </Container>
             
             <AppFooter/>

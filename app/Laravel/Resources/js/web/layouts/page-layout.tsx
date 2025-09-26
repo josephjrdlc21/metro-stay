@@ -16,7 +16,7 @@ export default function PageLayout({ children }: PropsWithChildren){
             <PageTopbar/>
             
             <Container maxWidth="8xl" mt={20}>
-                <Box p={4}>{children}</Box>
+                <Box py={4}>{children}</Box>
             </Container>
 
             <PageFooter/>

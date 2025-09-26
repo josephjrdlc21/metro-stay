@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 
-import { Box, Container, SimpleGrid, Stack, Text, Flex, Icon } from '@chakra-ui/react'
+import { Box, Container, SimpleGrid, Stack, 
+    Text, Flex, Icon, Separator } from '@chakra-ui/react'
 import { FaEnvelopeOpen } from 'react-icons/fa'
 
 const Logo = (props: any) => {
@@ -31,7 +32,7 @@ export default function LargeWithLogoLeft() {
         <Box bg="gray.50" color="gray.700" mt={40} _dark={{bg: "gray.800", color: "gray.400"}}>
             <Container py={10} px={4}>
                 <SimpleGrid
-                    templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(5, 1fr)" }} gap={5}
+                    templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(4, 1fr)" }} gap={5}
                 >
                     <Stack>
                         <Box>
@@ -42,81 +43,62 @@ export default function LargeWithLogoLeft() {
                                 </Text>
                             </Flex>
                         </Box>
-                        <Text fontSize={'sm'}>© 2025 Joseph. All rights reserved</Text>
-                    </Stack>
-                    <Stack align={'flex-start'}>
-                        <ListHeader>Product</ListHeader>
-                        <Box as="a">
-                            Overview
-                        </Box>
-                        <Box as="a">
-                            Features
-                        </Box>
-                        <Box as="a">
-                            Tutorials
-                        </Box>
-                        <Box as="a">
-                            Pricing
-                        </Box>
-                        <Box as="a">
-                            Releases
-                        </Box>
+                         <Text fontSize={'sm'} color="gray.500">© 2025 Joseph. All rights reserved</Text>
+                        <Text fontSize={'xs'} color="gray.500">Discover the world's most extraordinary places to stay, from boutique hotels to luxury villas and private islands.</Text>
                     </Stack>
                     <Stack align={'flex-start'}>
                         <ListHeader>Company</ListHeader>
-                        <Box as="a">
+                        <Text fontSize={'sm'} color="gray.500">
                             About
-                        </Box>
-                        <Box as="a">
+                        </Text>
+                        <Text fontSize={'sm'} color="gray.500">
                             Press
-                        </Box>
-                        <Box as="a">
+                        </Text>
+                        <Text fontSize={'sm'} color="gray.500">
                             Careers
-                        </Box>
-                        <Box as="a">
-                            Contact
-                        </Box>
-                        <Box as="a">
+                        </Text>
+                        <Text fontSize={'sm'} color="gray.500">
+                            Blog
+                        </Text>
+                        <Text fontSize={'sm'} color="gray.500">
                             Partners
-                        </Box>
+                        </Text>
                     </Stack>
                     <Stack align={'flex-start'}>
                         <ListHeader>Support</ListHeader>
-                        <Box as="a">
+                        <Text fontSize={'sm'} color="gray.500">
                             Help Center
-                        </Box>
-                        <Box as="a">
+                        </Text>
+                        <Text fontSize={'sm'} color="gray.500">
                             Terms of Service
-                        </Box>
-                        <Box as="a">
-                            Legal
-                        </Box>
-                        <Box as="a">
-                            Privacy Policy
-                        </Box>
-                        <Box as="a">
-                            Status
-                        </Box>
+                        </Text>
+                        <Text fontSize={'sm'} color="gray.500">
+                            Safety Information
+                        </Text>
+                        <Text fontSize={'sm'} color="gray.500">
+                            Cancellation Options
+                        </Text>
+                        <Text fontSize={'sm'} color="gray.500">
+                            Contact Us
+                        </Text>
                     </Stack>
                     <Stack align={'flex-start'}>
                         <ListHeader>Follow Us</ListHeader>
-                        <Box as="a">
+                        <Text fontSize={'sm'} color="gray.500">
                             Facebook
-                        </Box>
-                        <Box as="a">
+                        </Text>
+                        <Text fontSize={'sm'} color="gray.500">
                             Twitter
-                        </Box>
-                        <Box as="a">
-                            Dribbble
-                        </Box>
-                        <Box as="a">
+                        </Text>
+                        <Text fontSize={'sm'} color="gray.500">
                             Instagram
-                        </Box>
-                        <Box as="a">
+                        </Text>
+                        <Text fontSize={'sm'} color="gray.500">
                             LinkedIn
-                        </Box>
+                        </Text>
                     </Stack>
                 </SimpleGrid>
+                <Separator mt={10} />
             </Container>
         </Box>
     );
