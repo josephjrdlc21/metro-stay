@@ -11,5 +11,6 @@ Route::group(['as' => "web.", 'namespace' => $namespace, 'middleware' => ["web"]
         Route::get('/dashboard',  ['as' => "index", 'uses' => "MainController@index"]);
 
         include_once app_path('Laravel/Routes/Web/Hotel.php');
+        include_once app_path('Laravel/Routes/Web/Booking.php');
     });
 });

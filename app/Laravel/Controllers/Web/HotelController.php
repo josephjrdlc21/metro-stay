@@ -3,11 +3,12 @@
 namespace App\Laravel\Controllers\Web;
 
 use App\Laravel\Models\RoomType;
+use App\Laravel\Models\Booking;
 
-use App\Laravel\Actions\Web\Hotel\{RoomList};
+use App\Laravel\Actions\Web\Hotel\{RoomList, BookCreate};
 
 use App\Laravel\Requests\PageRequest;
-//use App\Laravel\Requests\Web\RoomRequest;
+use App\Laravel\Requests\Web\HotelRequest;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -44,7 +45,7 @@ class HotelController extends Controller{
         return inertia('modules/hotels/hotels-index', ['values' => $this->data]);
     }
 
-    public function show(PageRequest $request, ?int $id = null): Response|RedirectResponse {
+    public function book(PageRequest $request, ?int $id = null): Response|RedirectResponse {
         $this->data['page_title'] .= " - Show Hotel Type";
 
         $this->data['room_type'] = RoomType::find($id);
@@ -56,6 +57,25 @@ class HotelController extends Controller{
             return redirect()->route('web.hotels.index');
         }
 
-        return inertia('modules/hotels/hotels-show', ['values' => $this->data]);
+        return inertia('modules/hotels/hotels-book', ['values' => $this->data]);
+    }
+
+    public function store_book(HotelRequest $request, ?int $id = null): RedirectResponse {
+        $this->request['id'] = $id;
+        $this->request['customer'] = $this->data['auth']->id;
+        $this->request['check_in'] = $request->input('check_in');
+        $this->request['check_out'] = $request->input('check_out');
+        $this->request['guest'] = $request->input('guest');
+
+        $action = new BookCreate(
+            $this->request
+        );
+
+        $result = $action->execute();
+
+        session()->flash('notification-status', $result['status']);
+        session()->flash('notification-msg', $result['message']);
+
+        return $result['success'] ? redirect()->route('web.bookings.index') : redirect()->back();
     }
 }

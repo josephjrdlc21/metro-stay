@@ -53,9 +53,9 @@ export default function AuthRegister({ values }: { values: Values }){
                     {flash.message && <AppNotification status={flash.status} title={flash.message}/>}
                     <Box display="flex" alignItems="center" justifyContent="center" gap={2}>
                         <Icon as={FaEnvelopeOpen} boxSize={7} color="cyan.600" />
-                        <Heading size="3xl" color="gray.700">MetroStay</Heading>
+                        <Heading size="3xl" color="gray.700" _dark={{ color: "gray.200" }}>MetroStay</Heading>
                     </Box>
-                    <Text textStyle="sm" textAlign="center" my={4} color="gray.500">
+                    <Text textStyle="sm" textAlign="center" my={4} color="gray.500" _dark={{ color: "gray.300" }}>
                         Register an Account
                     </Text>
                     <Center mt={4}>

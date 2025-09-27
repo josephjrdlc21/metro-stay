@@ -134,4 +134,17 @@ class CustomValidator extends Validator {
                     ->count() ? false : true;
         }
     }
+
+    public function validateIsCapacity($attribute, $value, $parameters)
+    {
+        $id = (is_array($parameters) && isset($parameters[0])) ? $parameters[0] : 0;
+
+        $room = RoomType::find($id);
+
+        if (!$room) {
+            return false;
+        }
+
+        return $value <= $room->capacity;
+    }
 }

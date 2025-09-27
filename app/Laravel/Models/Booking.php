@@ -4,6 +4,7 @@ namespace App\Laravel\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Booking extends Model{
     
@@ -42,4 +43,12 @@ class Booking extends Model{
      * @var array
      */
     protected $casts = [];
+
+    public function room(): BelongsTo {
+        return $this->belongsTo('App\Laravel\Models\Room', 'room_id', 'id');
+    }
+
+    public function customer(): BelongsTo {
+        return $this->belongsTo('App\Laravel\Models\Customer', 'customer_id', 'id');
+    }
 }
