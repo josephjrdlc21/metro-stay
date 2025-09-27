@@ -12,5 +12,6 @@ Route::group(['as' => "web.", 'namespace' => $namespace, 'middleware' => ["web"]
 
         include_once app_path('Laravel/Routes/Web/Hotel.php');
         include_once app_path('Laravel/Routes/Web/Booking.php');
+        include_once app_path('Laravel/Routes/Web/Payment.php');
     });
 });

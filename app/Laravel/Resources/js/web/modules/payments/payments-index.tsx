@@ -4,16 +4,15 @@ import { useRoute } from "@ziggy"
 import { Head, useForm, usePage } from "@inertiajs/react"
 import type { PageProps as InertiaPageProps } from "@inertiajs/core"
 
-import { statusBadgeClass, dateTime, quantityFormat, priceFormat } from "@web/utils/helper"
+import { statusBadgeClass, dateTime, priceFormat } from "@web/utils/helper"
 
 import MainLayout from "@web/layouts/main-layout"
 import AppNotification from "@web/components/app-notification"
 import AppPagination from "@web/components/app-pagination"
 import { Heading, Text, Box, Link, Grid, Field, Input, HStack, Separator,
-    Button, Status, Table, Portal, Menu, IconButton, NativeSelect} from "@chakra-ui/react"
+    Button, Status, Table, NativeSelect} from "@chakra-ui/react"
 
 import { RiSearch2Line, RiResetRightLine} from "react-icons/ri"
-import { LuEllipsisVertical } from "react-icons/lu"
 
 interface PageProps extends InertiaPageProps{
     flash: any,
@@ -39,7 +38,7 @@ type FormValues = {
     end_date: string
 }
 
-export default function BookingsIndex({ values }: { values: Values }){
+export default function PaymentsIndex({ values }: { values: Values }){
     const route = useRoute();
 
     const { flash } = usePage<PageProps>().props;
@@ -53,15 +52,17 @@ export default function BookingsIndex({ values }: { values: Values }){
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        get(route('web.bookings.index'));
+        get(route('web.payments.index'));
     };
 
     return(
         <MainLayout>
             <Head title={values.page_title}/>
             <Box mt={10}>
-                <Heading size="4xl">Bookings</Heading>
-                <Text color="gray.500" my={4}>Manage your reservations with ease. View, or create new bookings to plan your stay with us.</Text>
+                <Heading size="4xl">Payments</Heading>
+                <Text color="gray.500" my={4}>Securely view your payment history, settle balances, and download receipts for your bookings.
+                    Check your bookings to complete your payment.
+                </Text>
             </Box>
             {flash.message && <AppNotification status={flash.status} title={flash.message}/>}
 
@@ -106,7 +107,7 @@ export default function BookingsIndex({ values }: { values: Values }){
                             <RiResetRightLine /> Clear
                         </Button>
                     ) : (
-                        <Link href={route("web.bookings.index")}>
+                        <Link href={route("web.payments.index")}>
                             <Button colorPalette="gray" variant="solid" size="sm">
                                 <RiResetRightLine /> Clear
                             </Button>
@@ -120,58 +121,37 @@ export default function BookingsIndex({ values }: { values: Values }){
                     <Table.Header>
                         <Table.Row>
                             <Table.ColumnHeader minW="200px">Ref No.</Table.ColumnHeader>
-                            <Table.ColumnHeader minW="200px">Room Type</Table.ColumnHeader>
-                            <Table.ColumnHeader minW="200px" textAlign="center">Room No.</Table.ColumnHeader>
+                            <Table.ColumnHeader minW="200px">Booking</Table.ColumnHeader>
+                            <Table.ColumnHeader minW="200px">Room</Table.ColumnHeader>
                             <Table.ColumnHeader minW="100px">Status</Table.ColumnHeader>
-                            <Table.ColumnHeader minW="80px" textAlign="center">Guest</Table.ColumnHeader>
+                            <Table.ColumnHeader minW="100px">Method</Table.ColumnHeader>
                             <Table.ColumnHeader minW="100px" textAlign="right">Amount</Table.ColumnHeader>
-                            <Table.ColumnHeader minW="200px">Booking Date</Table.ColumnHeader>
-                            <Table.ColumnHeader minW="80px" textAlign="center">Action</Table.ColumnHeader>
+                            <Table.ColumnHeader minW="200px">Date Paid</Table.ColumnHeader>
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
                         {values?.record?.data && values?.record?.data.length > 0 ? (
-                            (values?.record?.data.map)(booking => (
-                                <Table.Row key={booking.id}>
+                            (values?.record?.data.map)(payment => (
+                                <Table.Row key={payment.id}>
                                     <Table.Cell>
-                                        <Text fontSize="sm" color="blue.500">{booking.ref_no}</Text>
+                                        <Text fontSize="sm" color="blue.500">{payment.ref_no}</Text>
                                     </Table.Cell>
-                                    <Table.Cell>{booking.room_type_name}</Table.Cell>
-                                    <Table.Cell textAlign="center">{booking.room_number}</Table.Cell>
+                                    <Table.Cell>{payment.booking.ref_no}</Table.Cell>
+                                    <Table.Cell>{payment.booking.room_type_name}</Table.Cell>
                                     <Table.Cell>
-                                        <Status.Root colorPalette={statusBadgeClass(booking.status)}>
+                                        <Status.Root colorPalette={statusBadgeClass(payment.status)}>
                                             <Status.Indicator />
-                                            {booking.status}
+                                            {payment.status}
                                         </Status.Root>
                                     </Table.Cell>
-                                    <Table.Cell textAlign="center">{quantityFormat(booking.guest)}</Table.Cell>
-                                    <Table.Cell textAlign="right">₱ {priceFormat(booking.total_amount)}</Table.Cell>
-                                    <Table.Cell>{dateTime(booking.created_at)}</Table.Cell>
-                                    <Table.Cell textAlign="center">
-                                        <Menu.Root>
-                                            <Menu.Trigger asChild _focus={{ boxShadow: "none", outline: "none" }} _active={{ bg: "transparent" }}>
-                                                <IconButton aria-label="action" size="sm" variant="plain">
-                                                    <LuEllipsisVertical />
-                                                </IconButton>
-                                            </Menu.Trigger>
-                                            <Portal>
-                                                <Menu.Positioner>
-                                                    <Menu.Content>
-                                                        <Menu.Item cursor="pointer" value="edit">
-                                                            <Link href="" style={{ border: "0px", outline: "none", boxShadow: "none", textDecoration: "none", color: "inherit"}}>
-                                                                Pay Booking
-                                                            </Link>
-                                                        </Menu.Item>
-                                                    </Menu.Content>
-                                                </Menu.Positioner>
-                                            </Portal>
-                                        </Menu.Root>
-                                    </Table.Cell>
+                                    <Table.Cell>{payment.method ?? 'N/A'}</Table.Cell>
+                                    <Table.Cell textAlign="right">₱ {priceFormat(payment.amount)}</Table.Cell>
+                                    <Table.Cell>{payment.paid_at ? dateTime(payment.paid_at) : 'N/A'}</Table.Cell>
                                 </Table.Row>
                             ))
                         ) : (
                             <Table.Row>
-                                <Table.Cell colSpan={8} textAlign="center">No Record Found.</Table.Cell>
+                                <Table.Cell colSpan={7} textAlign="center">No Record Found.</Table.Cell>
                             </Table.Row>
                         )}
                     </Table.Body>

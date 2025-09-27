@@ -15,7 +15,7 @@ const Links = [
     { name: 'Dashboard', href: route('web.index') },
     { name: 'Hotels', href: route('web.hotels.index') },
     { name: 'Bookings', href: route('web.bookings.index') },
-    { name: 'Payments', href: '#' },
+    { name: 'Payments', href: route('web.payments.index') },
 ];
 
 const NavLink = ({ href, children }: NavLinkProps) => {

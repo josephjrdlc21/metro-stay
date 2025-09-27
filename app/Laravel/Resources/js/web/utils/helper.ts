@@ -30,9 +30,13 @@ export function statusBadgeClass(status: string): string {
             return "info";
         case "completed":
             return "success";
+        case "paid":
+            return "success";
         case "cleaning":
             return "red";
         case "maintenance":
+            return "red";
+        case "unpaid":
             return "red";
         default:
             return "gray";

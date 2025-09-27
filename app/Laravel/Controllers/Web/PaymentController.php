@@ -2,9 +2,9 @@
 
 namespace App\Laravel\Controllers\Web;
 
-use App\Laravel\Models\Booking;
+use App\Laravel\Models\Payment;
 
-use App\Laravel\Actions\Web\Booking\{BookingList};
+use App\Laravel\Actions\Web\Payment\{PaymentList};
 
 use App\Laravel\Requests\PageRequest;
 
@@ -14,7 +14,7 @@ use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
 use Carbon\Carbon;
 
-class BookingController extends Controller{
+class PaymentController extends Controller{
     protected array $data = [];
     protected array $request = [];
     protected ?int $per_page;
@@ -22,9 +22,8 @@ class BookingController extends Controller{
     public function __construct(){
         parent::__construct();
         array_merge($this->data?:[], parent::get_data());
-        $this->data['page_title'] .= " - Bookings";
-        $this->data['statuses'] = ['pending' => "Pending", 'confirmed' => "Confirmed", 'reserved' => "Reserved", 
-        'checked_in' => "Checked In", 'checked_out' => "Checked Out", 'completed' => "Completed", 'cancelled' => "Cancelled"];
+        $this->data['page_title'] .= " - Payments";
+        $this->data['statuses'] = ['paid' => "Paid", 'unpaid' => "Unpaid"];
         $this->per_page = env("DEFAULT_PER_PAGE", 10);
     }
 
@@ -34,13 +33,13 @@ class BookingController extends Controller{
         $this->data['keyword'] = Str::lower($request->get('keyword'));
         $this->data['selected_status'] = $request->get('status');
 
-        $first_record = Booking::oldest()->first();
+        $first_record = Payment::oldest()->first();
         $start_date = $first_record ? $request->get('start_date', $first_record->created_at->format("Y-m-d")) : $request->get('start_date', now()->startOfMonth());
 
         $this->data['start_date'] = Carbon::parse($start_date)->format("Y-m-d");
         $this->data['end_date'] = Carbon::parse($request->get('end_date', now()))->format("Y-m-d");
 
-        $action = new BookingList(
+        $action = new PaymentList(
             $this->data,
             $this->per_page
         );
@@ -49,6 +48,6 @@ class BookingController extends Controller{
 
         $this->data['record'] = $result['record'];
 
-        return inertia('modules/bookings/bookings-index', ['values' => $this->data]);
+        return inertia('modules/payments/payments-index', ['values' => $this->data]);
     }
 }

@@ -4,7 +4,7 @@ namespace App\Laravel\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Payment extends Model{
     
     use SoftDeletes;
@@ -42,4 +42,8 @@ class Payment extends Model{
      * @var array
      */
     protected $casts = [];
+
+    public function booking(): BelongsTo {
+        return $this->belongsTo('App\Laravel\Models\Booking', 'booking_id', 'id');
+    }
 }
