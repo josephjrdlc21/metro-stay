@@ -26,6 +26,7 @@ class AuthenticateRegister{
             $customer->email = Str::lower($this->request['email']);
             $customer->password = bcrypt($this->request['password']);
             $customer->phone_number = Helper::format_phone($this->request['phone_number']);
+            $customer->status = "active";
             $customer->save();
 
             DB::commit();

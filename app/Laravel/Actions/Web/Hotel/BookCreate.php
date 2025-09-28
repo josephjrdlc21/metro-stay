@@ -52,6 +52,7 @@ class BookCreate{
             $payment = new Payment;
             $payment->ref_no = 'PMT-' . now()->format('Ymd') . '-' . mt_rand(1000, 9999);
             $payment->booking_id = $booking->id;
+            $payment->customer_id = $this->request['customer'];
             $payment->amount = $booking->total_amount;
             $payment->status = "unpaid"; /* [unpaid, paid, refunded, failed] */
             $payment->save();

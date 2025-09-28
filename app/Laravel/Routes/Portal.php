@@ -13,5 +13,7 @@ Route::group(['prefix' => "admin", 'as' => "portal.", 'namespace' => $namespace,
         include_once app_path('Laravel/Routes/Portal/Customer.php');
         include_once app_path('Laravel/Routes/Portal/Room.php');
         include_once app_path('Laravel/Routes/Portal/RoomType.php');
+        include_once app_path('Laravel/Routes/Portal/Booking.php');
+        include_once app_path('Laravel/Routes/Portal/Payment.php');
     });
 });

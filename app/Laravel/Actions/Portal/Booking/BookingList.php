@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Laravel\Actions\Web\Payment;
+namespace App\Laravel\Actions\Portal\Booking;
 
-use App\Laravel\Models\Payment;
+use App\Laravel\Models\Booking;
 
 use Carbon\Carbon;
 
-class PaymentList{
+class BookingList{
     private array $data = [];
     private ?int $per_page;
 
@@ -19,8 +19,7 @@ class PaymentList{
     }
 
     public function execute(): array {
-        $record = Payment::with('booking')
-        ->when(strlen($this->data['keyword']) > 0, function ($query) {
+        $record = Booking::when(strlen($this->data['keyword']) > 0, function ($query) {
             $query->whereRaw("LOWER(ref_no) LIKE '%{$this->data['keyword']}%'");
         })
         ->when(strlen($this->data['selected_status']) > 0, function ($query) {
@@ -32,7 +31,6 @@ class PaymentList{
         ->when(strlen($this->data['end_date']) > 0, function ($query) {
             $query->whereDate('created_at', '<=', Carbon::parse($this->data['end_date'])->format("Y-m-d"));
         })
-        ->where('customer_id', $this->data['auth']->id)
         ->latest()
         ->paginate($this->per_page);
 

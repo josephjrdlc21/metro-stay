@@ -30,7 +30,7 @@ export default function AppSidebar(){
         {
             label: "Bookings",
             icon: AiOutlineCalendar,
-            href: "#",
+            href: route("portal.bookings.index"),
         },
         {
             label: "Customers",
@@ -55,7 +55,7 @@ export default function AppSidebar(){
         {
             label: "Payments",
             icon: AiOutlineCreditCard,
-            href: "#",
+            href: route("portal.payments.index"),
         },
         {
             label: "Sales Reports",

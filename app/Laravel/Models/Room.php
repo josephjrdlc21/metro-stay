@@ -5,6 +5,7 @@ namespace App\Laravel\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Room extends Model{
     
@@ -46,5 +47,9 @@ class Room extends Model{
 
     public function room_type(): BelongsTo {
         return $this->belongsTo('App\Laravel\Models\RoomType', 'room_type_id', 'id');
+    }
+
+    public function booking(): HasMany {
+        return $this->hasMany('App\Laravel\Models\Booking', 'room_id', 'id');
     }
 }

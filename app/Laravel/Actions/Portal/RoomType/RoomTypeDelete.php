@@ -3,6 +3,7 @@
 namespace App\Laravel\Actions\Portal\RoomType;
 
 use App\Laravel\Models\RoomType;
+use App\Laravel\Models\Room;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -23,6 +24,18 @@ class RoomTypeDelete{
 
         if(!$room_type){
             return ['success' => false, 'status' => "failed", 'message' => "Record not found."];
+        }
+        
+        $room = Room::where('room_type_id', $room_type->id)->where('status', '<>', 'available')->count();
+
+        if($room > 0){
+            return ['success' => false, 'status' => "failed", 'message' => "Unable to delete room type. There are still room occupied."];
+        }
+
+        $has_bookings = Room::where('room_type_id', $room_type->id)->whereHas('booking')->exists();
+
+        if($has_bookings) {
+            return ['success' => false, 'status'  => 'failed', 'message' => 'Unable to delete room type. There are still rooms with bookings.'];
         }
 
         DB::beginTransaction();

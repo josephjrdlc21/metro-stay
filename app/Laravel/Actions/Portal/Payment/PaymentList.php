@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Laravel\Actions\Web\Payment;
+namespace App\Laravel\Actions\Portal\Payment;
 
 use App\Laravel\Models\Payment;
 
@@ -32,7 +32,6 @@ class PaymentList{
         ->when(strlen($this->data['end_date']) > 0, function ($query) {
             $query->whereDate('created_at', '<=', Carbon::parse($this->data['end_date'])->format("Y-m-d"));
         })
-        ->where('customer_id', $this->data['auth']->id)
         ->latest()
         ->paginate($this->per_page);
 

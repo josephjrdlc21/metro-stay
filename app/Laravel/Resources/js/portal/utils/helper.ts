@@ -18,9 +18,25 @@ export function statusBadgeClass(status: string): string {
             return "orange";
         case "reserved":
             return "blue";
+        case "pending":
+            return "blue";
+        case "cancelled":
+            return "red";
+        case "checked_in":
+            return "warning";
+        case "checked_out":
+            return "success";
+        case "confirmed":
+            return "info";
+        case "completed":
+            return "success";
+        case "paid":
+            return "success";
         case "cleaning":
             return "red";
         case "maintenance":
+            return "red";
+        case "unpaid":
             return "red";
         default:
             return "gray";
