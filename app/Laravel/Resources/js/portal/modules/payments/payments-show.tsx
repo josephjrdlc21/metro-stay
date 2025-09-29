@@ -100,7 +100,7 @@ export default function PaymentsShow({ values }: { values: Values }){
                             </Box>
                         </SimpleGrid>
 
-                        <Heading _dark={{ color: "gray.300" }} color="gray.700" size="md" mt={4}>Booking Details</Heading>
+                        <Heading _dark={{ color: "gray.300" }} color="gray.700" size="md" mt={4} textAlign={{ base: "center", lg: "left" }}>Booking Details</Heading>
                         <SimpleGrid columns={{ base: 1, md: 2 }} gap={2}>
                             <Box textAlign={{ base: "center", lg: "left" }}>
                                 <Text _dark={{ color: "gray.300" }} color="gray.700" textStyle="sm" fontWeight="semibold" mt={4}>Name</Text>
@@ -118,7 +118,7 @@ export default function PaymentsShow({ values }: { values: Values }){
                             </Box>
                         </SimpleGrid>
 
-                        <Heading _dark={{ color: "gray.300" }} color="gray.700" size="md" mt={4}>Customer Details</Heading>
+                        <Heading _dark={{ color: "gray.300" }} color="gray.700" size="md" mt={4} textAlign={{ base: "center", lg: "left" }}>Customer Details</Heading>
                         <SimpleGrid columns={{ base: 1, md: 2 }} gap={2}>
                             <Box textAlign={{ base: "center", lg: "left" }}>
                                 <Text _dark={{ color: "gray.300" }} color="gray.700" textStyle="sm" fontWeight="semibold" mt={4}>Name</Text>
