@@ -46,4 +46,8 @@ class Payment extends Model{
     public function booking(): BelongsTo {
         return $this->belongsTo('App\Laravel\Models\Booking', 'booking_id', 'id');
     }
+
+    public function customer(): BelongsTo {
+        return $this->belongsTo('App\Laravel\Models\Customer', 'customer_id', 'id');
+    }
 }

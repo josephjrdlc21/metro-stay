@@ -190,7 +190,7 @@ export default function BookingsIndex({ values }: { values: Values }){
                                                         <Menu.Positioner>
                                                             <Menu.Content>
                                                                 <Menu.Item cursor="pointer" value="edit">
-                                                                    <Link href="" style={{ border: "0px", outline: "none", boxShadow: "none", textDecoration: "none", color: "inherit"}}>
+                                                                    <Link href={route('portal.bookings.show', booking.id)} style={{ border: "0px", outline: "none", boxShadow: "none", textDecoration: "none", color: "inherit"}}>
                                                                         Show Details
                                                                     </Link>
                                                                 </Menu.Item>

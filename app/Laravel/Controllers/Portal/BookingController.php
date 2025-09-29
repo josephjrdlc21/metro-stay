@@ -51,4 +51,19 @@ class BookingController extends Controller{
 
         return inertia('modules/bookings/bookings-index', ['values' => $this->data]);
     }
+
+    public function show(PageRequest $request, ?int $id = null): Response|RedirectResponse {
+        $this->data['page_title'] .= " - Show Booking";
+
+        $this->data['booking'] = Booking::with('customer')->find($id);
+
+        if(!$this->data['booking']){
+            session()->flash('notification-status', 'failed');
+            session()->flash('notification-msg', "Record not found.");
+
+            return redirect()->route('portal.bookings.index');
+        }
+
+        return inertia('modules/bookings/bookings-show', ['values' => $this->data]);
+    }
 }

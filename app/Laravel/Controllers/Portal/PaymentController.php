@@ -50,4 +50,19 @@ class PaymentController extends Controller{
 
         return inertia('modules/payments/payments-index', ['values' => $this->data]);
     }
+
+    public function show(PageRequest $request, ?int $id = null): Response|RedirectResponse {
+        $this->data['page_title'] .= " - Show Payment";
+
+        $this->data['payment'] = Payment::with(['customer', 'booking'])->find($id);
+
+        if(!$this->data['payment']){
+            session()->flash('notification-status', 'failed');
+            session()->flash('notification-msg', "Record not found.");
+
+            return redirect()->route('portal.payments.index');
+        }
+
+        return inertia('modules/payments/payments-show', ['values' => $this->data]);
+    }
 }
