@@ -4,7 +4,7 @@ namespace App\Laravel\Controllers\Web;
 
 use App\Laravel\Models\Payment;
 
-use App\Laravel\Actions\Web\Payment\{PaymentList};
+use App\Laravel\Actions\Web\Payment\{PaymentList, PaymentCharge};
 
 use App\Laravel\Requests\PageRequest;
 
@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
 use Carbon\Carbon;
+use Xendit\Xendit;
 
 class PaymentController extends Controller{
     protected array $data = [];
@@ -49,5 +50,15 @@ class PaymentController extends Controller{
         $this->data['record'] = $result['record'];
 
         return inertia('modules/payments/payments-index', ['values' => $this->data]);
+    }
+
+    public function payment(PageRequest $request): Response {
+        $this->data['page_title'] .= " - Payment";
+
+        return inertia('modules/payments/payments-checkout', ['values' => $this->data]);
+    }
+
+    public function payment_store(PageRequest $request){
+        dd($request->all());
     }
 }
